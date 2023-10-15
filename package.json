@@ -5,7 +5,9 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test:spec": "nx test",
+    "test:e2e": "nx e2e e2e --watch --browser=chrome",
+    "test:e2e-headless": "nx e2e e2e"
   },
   "private": true,
   "dependencies": {
