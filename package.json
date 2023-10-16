@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
+    "replit": "nx serve --host 0.0.0.0 --disable-host-check",
     "build": "nx build",
     "test:spec": "nx test",
     "test:e2e": "nx e2e e2e --watch --browser=chrome",

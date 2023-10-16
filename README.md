@@ -1,4 +1,4 @@
-# Boodi
+# BoodiAI
 
 AI bot for Exponential Enlightenment.
 
