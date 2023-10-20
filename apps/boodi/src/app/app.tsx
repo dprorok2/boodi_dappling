@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Welcome } from '@boodi/welcome';
 import styles from './app.module.scss';
-import Welcome from './welcome/welcome';
 
 export function App() {
   return (

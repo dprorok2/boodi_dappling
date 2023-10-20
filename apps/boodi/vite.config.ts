@@ -6,7 +6,7 @@ export default defineConfig({
   cacheDir: './node_modules/.vite/boodi',
 
   server: {
-    port: 4200,
+    port: 8888,
     host: 'localhost',
   },
 
@@ -24,7 +24,7 @@ export default defineConfig({
 
   test: {
     globals: true,
-    cache: { dir: './node_modules/.vitest' },
+    cache: { dir: '../../node_modules/.vitest' },
     environment: 'jsdom',
     include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
   },
