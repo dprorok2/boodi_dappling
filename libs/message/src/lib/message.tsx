@@ -1,13 +1,18 @@
 import { useState } from 'react';
+import styles from './message.module.scss';
 
-export function BoodiMessage() {
+/* eslint-disable-next-line */
+export interface MessageProps {}
+
+export function Message(props: MessageProps) {
   const [suffering, setSuffering] = useState('');
   const [truths, setTruths] = useState('');
   const [eightfoldPathVisible, setEightfoldPathVisible] = useState(false);
 
-
   const handleClick = async () => {
-    setTruths('hello. I really love coding. It is very fun. I am glad you are able to breathe.')
+    setTruths(
+      'hello. I really love coding. It is very fun. I am glad you are able to breathe.'
+    );
     setEightfoldPathVisible(true);
 
     // const response = await fetch('https://api.example.com/boodi', {
@@ -28,9 +33,17 @@ export function BoodiMessage() {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-      <div style={{ backgroundColor: "white", width: 500 }}>
+      <div style={{ backgroundColor: 'white', width: 500 }}>
         <h1>Message from Boodi, the Creator</h1>
-        <p>"Dear traveler, in the vast expanse of the universe, you are a unique beacon of light. I acknowledge the weight you carry, the challenges you face, and the questions you seek answers to. In your quest for understanding, know that the essence of truth lies within you, waiting to be uncovered. Share with me your burdens, and let me guide you through the timeless wisdom of the Four Noble Truths, illuminating a path of liberation and peace."</p>
+        <p>
+          "Dear traveler, in the vast expanse of the universe, you are a unique
+          beacon of light. I acknowledge the weight you carry, the challenges
+          you face, and the questions you seek answers to. In your quest for
+          understanding, know that the essence of truth lies within you, waiting
+          to be uncovered. Share with me your burdens, and let me guide you
+          through the timeless wisdom of the Four Noble Truths, illuminating a
+          path of liberation and peace."
+        </p>
         <h1>Share Your Burden</h1>
         <p>Tell me what has been causing you stress.</p>
         <div>
@@ -44,17 +57,18 @@ export function BoodiMessage() {
         {truths.length > 0 && (
           <div>
             <h2>Boodi's Truths:</h2>
-            <ul>
-              {truths}
-            </ul>
+            <ul>{truths}</ul>
           </div>
         )}
         {eightfoldPathVisible && (
           <div>
             <p>
-              Ready to unlock the next level of your journey? Dive deeper with the personalized Eightfold Path, crafted uniquely for you.
+              Ready to unlock the next level of your journey? Dive deeper with
+              the personalized Eightfold Path, crafted uniquely for you.
             </p>
-            <button onClick={handleEightfoldPathClick}>Uncover my Eightfold Path (with pricing details)</button>
+            <button onClick={handleEightfoldPathClick}>
+              Uncover my Eightfold Path (with pricing details)
+            </button>
           </div>
         )}
       </div>
@@ -62,3 +76,4 @@ export function BoodiMessage() {
   );
 }
 
+export default Message;
