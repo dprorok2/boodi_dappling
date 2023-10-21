@@ -1,9 +1,50 @@
+import { useState } from 'react';
+import { createClient } from '@supabase/supabase-js';
 import styles from './welcome.module.scss';
 
 /* eslint-disable-next-line */
 export interface WelcomeProps {}
 
 export function Welcome(props: WelcomeProps) {
+  const [email, setEmail] = useState('');
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+
+  const supabase = createClient(
+    import.meta.env.VITE_SUPABASE_URL,
+    import.meta.env.VITE_SUPABASE_ANON_KEY
+  );
+
+  const insertSubscriber = async () => {
+    const { data: authenticated, error: authError } =
+      await supabase.auth.signInWithPassword({
+        email: import.meta.env.VITE_SUPABASE_SUBSCRIBERS_USER,
+        password: import.meta.env.VITE_SUPABASE_SUBSCRIBERS_PW,
+      });
+
+    if (authError) {
+      console.error('Error authenticating with Supabase.');
+      return;
+    }
+
+    if (authenticated) {
+      const browser_name = navigator.userAgent;
+
+      const { data: queryData, error: queryError } = await supabase
+        .from('Subscribers')
+        .insert({ email, browser_name });
+
+      if (queryError) {
+        console.error(`Database query failed: ${queryError.message}`);
+        return;
+      }
+
+      if (queryData) {
+        setEmail(queryData);
+        console.log('Query data', queryData);
+      }
+    }
+  };
+
   return (
     <div className={styles['container']}>
       <h1>
@@ -40,6 +81,25 @@ export function Welcome(props: WelcomeProps) {
         with your unique essence. Embrace the next evolution, today. Because for
         Innovators like you, the future is now.
       </p>
+
+      {!isButtonClicked && (
+        <>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <button
+            className={styles['gimme-btn']}
+            onClick={() => {
+              setIsButtonClicked(true);
+              insertSubscriber();
+            }}
+          >
+            Gimme That Boodi
+          </button>
+        </>
+      )}
     </div>
   );
 }
