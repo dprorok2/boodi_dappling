@@ -8,7 +8,7 @@ export function App() {
   return (
     <Routes>
       <Route path="/" element={<Welcome />} />
-      <Route path="/message" element={<Message />} />
+      <Route path="/chat" element={<Message />} />
     </Routes>
   );
 }
