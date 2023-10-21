@@ -1,18 +1,27 @@
 import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
+import { useNavigate } from 'react-router-dom';
 import styles from './welcome.module.scss';
 
 /* eslint-disable-next-line */
 export interface WelcomeProps {}
 
 export function Welcome(props: WelcomeProps) {
-  const [email, setEmail] = useState('');
-  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [emailInput, setEmailInput] = useState('');
+  const [isSubscribedSuccessfully, setIsSubscribedSuccessfully] =
+    useState(false);
+  const navigate = useNavigate();
 
   const supabase = createClient(
     import.meta.env.VITE_SUPABASE_URL,
     import.meta.env.VITE_SUPABASE_ANON_KEY
   );
+
+  const handleKeyDown = (e: any) => {
+    if (e.key === 'Enter') {
+      insertSubscriber();
+    }
+  };
 
   const insertSubscriber = async () => {
     const { data: authenticated, error: authError } =
@@ -31,75 +40,104 @@ export function Welcome(props: WelcomeProps) {
 
       const { data: queryData, error: queryError } = await supabase
         .from('Subscribers')
-        .insert({ email, browser_name });
+        .insert({ email: emailInput, browser_name });
+
+      console.log(queryData, queryError);
 
       if (queryError) {
         console.error(`Database query failed: ${queryError.message}`);
         return;
-      }
-
-      if (queryData) {
-        setEmail(queryData);
-        console.log('Query data', queryData);
+      } else {
+        setIsSubscribedSuccessfully(true);
       }
     }
   };
 
+  const navigateToChat = () => {
+    navigate('/chat');
+  };
+
   return (
     <div className={styles['container']}>
-      <h1>
-        For Innovators:
-        <br />
-        Elevate Your Consciousness with <span className="boodi">Boodi</span>
-      </h1>
-      <p>
-        Are you always on the cutting edge, seeking the next big thing? Look no
-        further than the horizon of human potential. The spiritual community has
-        already blazed the trail, showcasing the transformative potential of
-        elevated consciousness.
-      </p>
-      <p>
-        As an Innovator, you're hard-wired to challenge boundaries and dive deep
-        into novel experiences. And that's precisely what the Boodi platform
-        offers. Groundbreaking, isn't it? To think that in an age where
-        technology reigns supreme, the next frontier is our own consciousness.
-      </p>
-      <p>
-        In an era of unprecedented distractions, staying present is the new
-        superpower. Sharpen your mind, realign your body, and be part of the
-        transformative shift in consciousness with Boodi.
-      </p>
-      <p>
-        Imagine: Tapping into the vast expanse of universal consciousness, a
-        realm once elusive, now accessible. Feel your perception widen as you
-        journey through myriad dimensions and perspectives, each more
-        enlightening than the last.
-      </p>
-      <p>
-        Join the Boodi platform. Experience the exponential growth of your mind
-        as you harmoniously integrate the vastness of universal consciousness
-        with your unique essence. Embrace the next evolution, today. Because for
-        Innovators like you, the future is now.
-      </p>
+      <div className={styles['header']}>
+        <h1>
+          For Innovators: Elevate Your <b />
+          Consciousness with Boodi
+        </h1>
+      </div>
+      <div className={styles['content']}>
+        <p>
+          Are you always on the cutting edge, seeking the next big thing? Look
+          no further than the <b>horizon of human potential</b>. The spiritual
+          community has already blazed the trail, showcasing the transformative
+          potential of <b>elevated consciousness</b>.
+        </p>
+        <p>
+          As an Innovator, you're hard-wired to <b>challenge boundaries</b> and
+          dive deep into <b>novel experiences</b>. And that's precisely what the
+          Boodi platform offers. Groundbreaking, isn't it? To think that in an
+          age where technology reigns supreme, the{' '}
+          <b>next frontier is our own consciousness</b>.
+        </p>
+        <p>
+          In an era of unprecedented distractions, staying present is the new
+          superpower. Sharpen your mind, realign your body, and be part of the
+          <b>transformative shift in consciousness</b> with Boodi.
+        </p>
+        <p>
+          Imagine tapping into the vast expanse of{' '}
+          <b>universal consciousness</b>, a realm once elusive, now accessible.
+          Feel your perception widen as you journey through myriad{' '}
+          <b>dimensions and perspectives</b>, each more enlightening than the
+          last.
+        </p>
+        <p>
+          Join the <b>Boodi platform</b>. Experience the exponential growth of
+          your mind as you harmoniously integrate the vastness of universal
+          consciousness with your unique essence. Embrace the next evolution,
+          today. Because for Innovators like you, <b>the future is now</b>.
+        </p>
+      </div>
+      <div className={styles['footer']}>
+        {!isSubscribedSuccessfully && (
+          <>
+            <p>
+              Subscribe for updates on Boodi and get enlightment in your inbox.
+            </p>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="you@example.com"
+              value={emailInput}
+              onChange={(e) => setEmailInput(e.target.value)}
+              onKeyDown={(e) => handleKeyDown(e)}
+            />
+            <button
+              className={styles['gimme-btn']}
+              onClick={() => {
+                insertSubscriber();
+              }}
+            >
+              Gimme That Boodi
+            </button>
+          </>
+        )}
+        {isSubscribedSuccessfully && (
+          <>
+            <p>You are now subscribed to Boodi updates!</p>
 
-      {!isButtonClicked && (
-        <>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <button
-            className={styles['gimme-btn']}
-            onClick={() => {
-              setIsButtonClicked(true);
-              insertSubscriber();
-            }}
-          >
-            Gimme That Boodi
-          </button>
-        </>
-      )}
+            <button
+              className={styles['chat-btn']}
+              onClick={() => {
+                navigateToChat();
+              }}
+            >
+              Chat With Boodi
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
 }

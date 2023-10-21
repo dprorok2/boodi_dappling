@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
-
+import './app/styles/_normalize.scss';
 import App from './app/app';
 
 const root = ReactDOM.createRoot(

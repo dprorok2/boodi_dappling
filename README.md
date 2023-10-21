@@ -9,6 +9,7 @@ A meditation-like app with different “buddha” personalities. You can get AI-
 [![Nx](https://img.shields.io/badge/Nx-16-gray?style=for-the-badge&logo=nx)]()
 [![React](https://img.shields.io/badge/React-16-gray?style=for-the-badge&logo=react)]()
 [![Vite](https://img.shields.io/badge/Vite-4-gray?style=for-the-badge&logo=vite)]()
+[![Sass](https://img.shields.io/badge/Sass-1-gray?style=for-the-badge&logo=sass)]()
 [![ChatGPT](https://img.shields.io/badge/ChatGPT-4-gray?style=for-the-badge&logo=openai&logoColor=19a280)]()
 
 <div style="margin-bottom:100px;"></div>
