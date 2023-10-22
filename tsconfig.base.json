@@ -15,8 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@boodi/welcome": ["libs/welcome/src/index.ts"],
+      "@boodi/chat": ["libs/chat/src/index.ts"],
       "@boodi/message": ["libs/message/src/index.ts"],
+      "@boodi/welcome": ["libs/welcome/src/index.ts"],
       "message": ["libs/message/src/index.ts"]
     }
   },

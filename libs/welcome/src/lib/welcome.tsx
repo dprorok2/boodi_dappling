@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { useNavigate } from 'react-router-dom';
 import styles from './welcome.module.scss';
@@ -7,6 +7,14 @@ import styles from './welcome.module.scss';
 export interface WelcomeProps {}
 
 export function Welcome(props: WelcomeProps) {
+  useEffect(() => {
+    document.body.classList.add(styles['welcome']);
+    document.title = 'Boodi | Exponential Enlightenment';
+    return () => {
+      document.body.classList.remove(styles['chawelcomet']);
+    };
+  }, []);
+
   const [emailInput, setEmailInput] = useState('');
   const [isSubscribedSuccessfully, setIsSubscribedSuccessfully] =
     useState(false);
@@ -96,6 +104,13 @@ export function Welcome(props: WelcomeProps) {
           your mind as you harmoniously integrate the vastness of universal
           consciousness with your unique essence. Embrace the next evolution,
           today. Because for Innovators like you, <b>the future is now</b>.
+        </p>
+        <p style={{ textAlign: 'center' }}>
+          <img
+            className={styles['meditator']}
+            src="meditator.png"
+            alt="meditator"
+          ></img>
         </p>
       </div>
       <div className={styles['footer']}>
