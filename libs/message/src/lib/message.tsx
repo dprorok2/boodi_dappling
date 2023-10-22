@@ -1,10 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './message.module.scss';
-
 /* eslint-disable-next-line */
 export interface MessageProps {}
 
 export function Message(props: MessageProps) {
+  useEffect(() => {
+    document.body.classList.add(styles['message']);
+    document.title = 'Boodi | Message';
+    return () => {
+      document.body.classList.remove(styles['message']);
+    };
+  }, []);
+
   const [suffering, setSuffering] = useState('');
   const [truths, setTruths] = useState('');
   const [eightfoldPathVisible, setEightfoldPathVisible] = useState(false);

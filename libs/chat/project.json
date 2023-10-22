@@ -1,7 +1,7 @@
 {
-  "name": "welcome",
+  "name": "chat",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/welcome/src",
+  "sourceRoot": "libs/chat/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -9,7 +9,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/welcome/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["libs/chat/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
@@ -17,7 +17,7 @@
       "outputs": ["{options.reportsDirectory}"],
       "options": {
         "passWithNoTests": true,
-        "reportsDirectory": "../../coverage/libs/welcome"
+        "reportsDirectory": "../../coverage/libs/chat"
       }
     }
   }

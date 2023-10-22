@@ -1,7 +1,6 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+@use '../../../../apps/boodi/src/app/styles/colors';
+
+.message {
+  font-family: 'Tilt Neon', sans-serif;
+  background: colors.$white;
+}

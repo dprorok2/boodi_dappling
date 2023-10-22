@@ -1,6 +1,6 @@
 @use '../../../../apps/boodi/src/app/styles/colors';
 
-body {
+.welcome {
   font-family: 'Tilt Neon', sans-serif;
   background: colors.$blueOxford;
 }
@@ -48,11 +48,11 @@ body {
     margin: 0 auto;
     p {
       font-family: 'Tilt Neon', sans-serif;
-      font-size: 24px;
+      font-size: 20px;
       margin-top: 0;
       margin-bottom: 30px;
       padding: 0 20px;
-      line-height: 32px;
+      line-height: 28px;
       text-align: justify;
     }
   }
@@ -94,10 +94,6 @@ body {
       margin: 0;
       background: colors.$blueOxford;
       color: colors.$blueIce;
-      .gimme-btn {
-      }
-      .chat-btn {
-      }
       &:hover {
         cursor: pointer;
         filter: drop-shadow(0 0 10px colors.$blueIce);
@@ -120,4 +116,10 @@ body {
     pointer-events: none;
     z-index: -1;
   }
+}
+
+.meditator {
+  width: 200px;
+  height: 200px;
+  margin: auto;
 }
