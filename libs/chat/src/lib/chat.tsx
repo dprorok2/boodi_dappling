@@ -25,13 +25,16 @@ export function Chat(props: ChatProps) {
 
   const getFourTruths = async () => {
     try {
-      const response = await fetch('http://localhost:5000/four-noble-truths', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ suffering }),
-      });
+      const response = await fetch(
+        'https://boodi-proxy-AlexCris1.replit.app/four-noble-truths',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ suffering }),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -47,13 +50,16 @@ export function Chat(props: ChatProps) {
 
   const getEightfoldPath = async (fullPath = false) => {
     try {
-      const response = await fetch('http://localhost:5000/eightfold-path', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ suffering }),
-      });
+      const response = await fetch(
+        'https://boodi-proxy-AlexCris1.replit.app/eightfold-path',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ suffering }),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -116,8 +122,10 @@ export function Chat(props: ChatProps) {
         </div>
       )}
       <div className={styles['footer-links']}>
-        <a href="#">Donate</a>
-        <a href="#">Find a coach</a>
+        <a href="https://paypal.me/djprorok">Donate</a>
+        <a href="https://calendly.com/davidprorok/clarity-session-for-innovators">
+          Find a coach
+        </a>
       </div>
     </div>
   );

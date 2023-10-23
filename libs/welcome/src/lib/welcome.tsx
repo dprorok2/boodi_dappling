@@ -32,32 +32,19 @@ export function Welcome(props: WelcomeProps) {
   };
 
   const insertSubscriber = async () => {
-    const { data: authenticated, error: authError } =
-      await supabase.auth.signInWithPassword({
-        email: import.meta.env.VITE_SUPABASE_SUBSCRIBERS_USER,
-        password: import.meta.env.VITE_SUPABASE_SUBSCRIBERS_PW,
-      });
+    const browser_name = navigator.userAgent;
 
-    if (authError) {
-      console.error('Error authenticating with Supabase.');
+    const { data: queryData, error: queryError } = await supabase
+      .from('Subscribers')
+      .insert({ email: emailInput, browser_name });
+
+    console.log(queryData, queryError);
+
+    if (queryError) {
+      console.error(`Database query failed: ${queryError.message}`);
       return;
-    }
-
-    if (authenticated) {
-      const browser_name = navigator.userAgent;
-
-      const { data: queryData, error: queryError } = await supabase
-        .from('Subscribers')
-        .insert({ email: emailInput, browser_name });
-
-      console.log(queryData, queryError);
-
-      if (queryError) {
-        console.error(`Database query failed: ${queryError.message}`);
-        return;
-      } else {
-        setIsSubscribedSuccessfully(true);
-      }
+    } else {
+      setIsSubscribedSuccessfully(true);
     }
   };
 
@@ -107,9 +94,9 @@ export function Welcome(props: WelcomeProps) {
         </p>
         <p style={{ textAlign: 'center' }}>
           <img
-            className={styles['meditator']}
-            src="meditator.png"
-            alt="meditator"
+            className={styles['book-lotus']}
+            src="book-lotus.jpeg"
+            alt="book-lotus"
           ></img>
         </p>
       </div>
