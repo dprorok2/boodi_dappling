@@ -29,4 +29,5 @@ requiredFiles = [".replit", "replit.nix", ".config"]
 deploymentTarget = "static"
 ignorePorts = false
 build = ["sh", "-c", "npm run build"]
+
 publicDir = "dist/boodi"
