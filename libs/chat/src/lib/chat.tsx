@@ -3,7 +3,7 @@ import DOMPurify from 'dompurify';
 import styles from './chat.module.scss';
 
 /* eslint-disable-next-line */
-export interface ChatProps {}
+export interface ChatProps { }
 
 export function Chat(props: ChatProps) {
   useEffect(() => {
@@ -138,8 +138,8 @@ export function Chat(props: ChatProps) {
       )}
 
       <div className={styles['footer-links']}>
-        <a href="https://paypal.me/djprorok">Donate</a>
-        <a href="https://calendly.com/davidprorok/clarity-session-for-innovators">
+        <a href="https://paypal.me/djprorok" target="_blank">Donate</a>
+        <a href="https://calendly.com/davidprorok/clarity-session-for-innovators" target="_blank">
           Find a coach
         </a>
       </div>
