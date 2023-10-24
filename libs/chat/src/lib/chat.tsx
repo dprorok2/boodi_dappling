@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import DOMPurify from 'dompurify';
 import styles from './chat.module.scss';
 
 /* eslint-disable-next-line */
@@ -26,6 +27,7 @@ export function Chat(props: ChatProps) {
   const getFourTruths = async () => {
     try {
       const response = await fetch(
+        //'http://localhost:5000/four-noble-truths',
         'https://boodi-proxy-AlexCris1.replit.app/four-noble-truths',
         {
           method: 'POST',
@@ -51,6 +53,7 @@ export function Chat(props: ChatProps) {
   const getEightfoldPath = async (fullPath = false) => {
     try {
       const response = await fetch(
+        //'http://localhost:5000/eightfold-path',
         'https://boodi-proxy-AlexCris1.replit.app/eightfold-path',
         {
           method: 'POST',
@@ -100,27 +103,40 @@ export function Chat(props: ChatProps) {
       <button className={styles['truth-btn']} onClick={() => showMeTheTruth()}>
         Show Me The Truth
       </button>
-      {truths && eightfoldPath && (
-        <div className={styles['four-noble-truths']}>
-          <h2>The Four Noble Truths</h2>
 
-          <div className={styles['inner-content']}>{truths}</div>
-        </div>
-      )}
-      {eightfoldPath && truths && (
-        <div className={styles['eightfold-path']}>
-          <h2>The Noble Eightfold Path</h2>
-          <div className={styles['inner-content']}>
-            {eightfoldPath}
-            <div className={styles['create-free-account']}>
-              <p>
-                To access steps 2 &ndash; 8, <br />
-                create a free account.
-              </p>
+      {truths && eightfoldPath && (
+        <>
+          <div className={styles['four-noble-truths']}>
+            <h2>The Four Noble Truths</h2>
+            <div
+              className={styles['inner-content']}
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truths) }}
+            ></div>
+          </div>
+
+          <div className={styles['eightfold-path']}>
+            <h2>The Noble Eightfold Path</h2>
+            <div
+              className={styles['inner-content']}
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(eightfoldPath),
+              }}
+            ></div>
+          </div>
+
+          <div className={styles['create-account']}>
+            <div className={styles['inner-content']}>
+              <div className={styles['create-free-account']}>
+                <p>
+                  To access steps 2 &ndash; 8, <br />
+                  create a free account.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
+
       <div className={styles['footer-links']}>
         <a href="https://paypal.me/djprorok">Donate</a>
         <a href="https://calendly.com/davidprorok/clarity-session-for-innovators">

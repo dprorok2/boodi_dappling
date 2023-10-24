@@ -113,7 +113,6 @@
       line-height: 28px;
       text-align: left;
       color: colors.$gray1;
-      white-space: pre-wrap;
     }
   }
   .eightfold-path {
@@ -135,7 +134,23 @@
       line-height: 28px;
       text-align: left;
       color: colors.$gray1;
-      white-space: pre-wrap;
+    }
+  }
+  .create-account {
+    width: 100vw;
+    background: colors.$blueOxford;
+    .inner-content {
+      width: 80%;
+      max-width: 400px;
+      margin: auto;
+      font-family: 'Tilt Neon', sans-serif;
+      font-size: 20px;
+      font-style: normal;
+      margin: 10px auto 0 auto;
+      padding: 20px;
+      line-height: 28px;
+      text-align: left;
+      color: colors.$gray1;
       .create-free-account {
         height: 200px;
         width: 100%;
