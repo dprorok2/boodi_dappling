@@ -31,6 +31,41 @@
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  .user-top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4rem;
+    padding: 0.5rem;
+    width: 100vw;
+    background: colors.$blueOxford;
+    text-align: right;
+    .full-name {
+      display: inline-block;
+      padding-right: 1rem;
+      padding-top: 0.25rem;
+      color: colors.$white;
+    }
+    .email {
+      display: inline-block;
+      padding-right: 1rem;
+      font-size: 12px;
+      color: colors.$gray1;
+    }
+    .signout {
+      display: inline-block;
+      padding: 0rem 1rem 0 0;
+      font-size: 14px;
+      font-weight: 500;
+      color: colors.$gray1;
+      cursor: pointer;
+    }
+    img {
+      float: right;
+      width: 3rem;
+      height: auto;
+    }
+  }
   h1 {
     font-family: 'Permanent Marker', cursive;
     font-size: 30px;
@@ -95,7 +130,8 @@
     }
   }
   .four-noble-truths {
-    width: 100vw;
+    width: 100%;
+    max-width: 570px;
     background: colors.$blueOxford;
     h2 {
       color: colors.$yellow;
@@ -113,11 +149,20 @@
       line-height: 28px;
       text-align: left;
       color: colors.$gray1;
+      h3 {
+        margin-bottom: 1rem;
+        font-weight: 800;
+      }
+      p {
+        margin-bottom: 1rem;
+      }
     }
   }
   .eightfold-path {
-    width: 100vw;
+    width: 100%;
+    max-width: 570px;
     background: colors.$blueOxford;
+    margin: 2rem 0;
     h2 {
       color: colors.$yellow;
       margin-top: 36px;
@@ -134,50 +179,40 @@
       line-height: 28px;
       text-align: left;
       color: colors.$gray1;
+      h3 {
+        margin-bottom: 1rem;
+        font-weight: 800;
+      }
+      p {
+        margin-bottom: 1rem;
+      }
     }
-  }
-  .create-account {
-    width: 100vw;
-    background: colors.$blueOxford;
-    .inner-content {
+    .create-free-account {
+      height: 200px;
       width: 80%;
-      max-width: 400px;
-      margin: auto;
-      font-family: 'Tilt Neon', sans-serif;
-      font-size: 20px;
-      font-style: normal;
-      margin: 10px auto 0 auto;
-      padding: 20px;
-      line-height: 28px;
-      text-align: left;
-      color: colors.$gray1;
-      .create-free-account {
-        height: 200px;
-        width: 100%;
-        margin: 48px 0;
-        background: radial-gradient(
-          circle at 140% 140%,
-          colors.$pink,
-          colors.$pink2 10%,
-          colors.$yellow 60%,
-          colors.$orange 100%,
-          colors.$yellow 200%
-        );
-        filter: drop-shadow(14px 14px 0px colors.$blueOxford)
-          drop-shadow(14px 14px 7px colors.$teal)
-          drop-shadow(0px 0px 20px colors.$blueIce);
-        p {
-          color: colors.$blueOxford;
-          font-size: 26px;
-          text-align: center;
-          padding: 24px 0;
-        }
+      margin: 48px auto;
+      background: radial-gradient(
+        circle at 140% 140%,
+        colors.$pink,
+        colors.$pink2 10%,
+        colors.$yellow 60%,
+        colors.$orange 100%,
+        colors.$yellow 200%
+      );
+      filter: drop-shadow(14px 14px 0px colors.$blueOxford)
+        drop-shadow(14px 14px 7px colors.$teal)
+        drop-shadow(0px 0px 20px colors.$blueIce);
+      p {
+        color: colors.$blueOxford;
+        font-size: 26px;
+        text-align: center;
+        padding: 24px 0;
       }
     }
   }
 }
 .footer-links {
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
@@ -187,9 +222,13 @@
     color: colors.$blueOxford;
     padding: 8px 20px 10px 20px;
     font-size: 20px;
+    height: 40px;
+    line-height: 20px;
     &:hover {
       background: colors.$blueOxford;
       color: colors.$blueIce;
+      border: 2px solid colors.$blueIce;
+      filter: drop-shadow(0 0 0.5rem colors.$blueIce);
     }
   }
 }
