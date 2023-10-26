@@ -89,7 +89,7 @@ export function Chat(props: ChatProps) {
     try {
       const response = await fetch(
         //'http://localhost:5000/four-noble-truths',
-        'https://boodi-proxy-AlexCris1.replit.app/four-noble-truths',
+        'https://boodi-proxy.replit.app/four-noble-truths',
         {
           method: 'POST',
           headers: {
@@ -114,7 +114,7 @@ export function Chat(props: ChatProps) {
 
   const getEightfoldPath = async () => {
     //const domain = 'http://localhost:5000';
-    const domain = 'https://boodi-proxy-AlexCris1.replit.app';
+    const domain = 'https://boodi-proxy.replit.app';
     const endpoint = currentUser
       ? '/eightfold-path-full'
       : '/eightfold-path-first-only';
