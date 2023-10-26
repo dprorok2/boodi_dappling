@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './welcome.module.scss';
 
@@ -11,56 +10,35 @@ export function Welcome(props: WelcomeProps) {
     document.body.classList.add(styles['welcome']);
     document.title = 'Boodi | Exponential Enlightenment';
     return () => {
-      document.body.classList.remove(styles['chawelcomet']);
+      document.body.classList.remove(styles['welcome']);
     };
   }, []);
 
-  const [emailInput, setEmailInput] = useState('');
-  const [isSubscribedSuccessfully, setIsSubscribedSuccessfully] =
-    useState(false);
   const navigate = useNavigate();
 
-  const supabase = createClient(
-    import.meta.env.VITE_SUPABASE_URL,
-    import.meta.env.VITE_SUPABASE_ANON_KEY
-  );
-
-  const handleKeyDown = (e: any) => {
-    if (e.key === 'Enter') {
-      insertSubscriber();
-    }
-  };
-
-  const insertSubscriber = async () => {
-    const browser_name = navigator.userAgent;
-
-    const { data: queryData, error: queryError } = await supabase
-      .from('Subscribers')
-      .insert({ email: emailInput, browser_name });
-
-    console.log(queryData, queryError);
-
-    if (queryError) {
-      console.error(`Database query failed: ${queryError.message}`);
-      return;
-    } else {
-      setIsSubscribedSuccessfully(true);
-    }
-  };
-
-  const navigateToChat = () => {
+  const navigateToChat = async () => {
     navigate('/chat');
   };
 
   return (
-    <div className={styles['container']}>
-      <div className={styles['header']}>
+    <div className={`${styles['container']}`}>
+      <div className={`${styles['header']}`}>
         <h1>
           For Innovators: Elevate Your <b />
           Consciousness with Boodi
         </h1>
       </div>
-      <div className={styles['content']}>
+      <div className={`${styles['content']}`}>
+        <p className="w-full">
+          <button
+            className={`${styles['chat-btn']} primary-btn`}
+            onClick={() => {
+              navigateToChat();
+            }}
+          >
+            Chat With Boodi
+          </button>
+        </p>
         <p>
           Are you always on the cutting edge, seeking the next big thing? Look
           no further than the <b>horizon of human potential</b>. The spiritual
@@ -76,10 +54,15 @@ export function Welcome(props: WelcomeProps) {
         </p>
         <p>
           In an era of unprecedented distractions, staying present is the new
-          superpower. Sharpen your mind, realign your body, and be part of the
+          superpower. Sharpen your mind, realign your body, and be part of the{' '}
           <b>transformative shift in consciousness</b> with Boodi.
         </p>
         <p>
+          <img
+            className={`${styles['book-lotus']} float-right`}
+            src="book-lotus.jpeg"
+            alt="book-lotus"
+          ></img>
           Imagine tapping into the vast expanse of{' '}
           <b>universal consciousness</b>, a realm once elusive, now accessible.
           Feel your perception widen as you journey through myriad{' '}
@@ -92,53 +75,19 @@ export function Welcome(props: WelcomeProps) {
           consciousness with your unique essence. Embrace the next evolution,
           today. Because for Innovators like you, <b>the future is now</b>.
         </p>
-        <p style={{ textAlign: 'center' }}>
-          <img
-            className={styles['book-lotus']}
-            src="book-lotus.jpeg"
-            alt="book-lotus"
-          ></img>
-        </p>
       </div>
-      <div className={styles['footer']}>
-        {!isSubscribedSuccessfully && (
-          <>
-            <p>
-              Subscribe for updates on Boodi and get enlightment in your inbox.
-            </p>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="you@example.com"
-              value={emailInput}
-              onChange={(e) => setEmailInput(e.target.value)}
-              onKeyDown={(e) => handleKeyDown(e)}
-            />
-            <button
-              className={styles['gimme-btn']}
-              onClick={() => {
-                insertSubscriber();
-              }}
-            >
-              Gimme That Boodi
-            </button>
-          </>
-        )}
-        {isSubscribedSuccessfully && (
-          <>
-            <p>You are now subscribed to Boodi updates!</p>
-
-            <button
-              className={styles['chat-btn']}
-              onClick={() => {
-                navigateToChat();
-              }}
-            >
-              Chat With Boodi
-            </button>
-          </>
-        )}
+      <div className={`${styles['footer']}`}>
+        {' '}
+        <p className="w-full">
+          <button
+            className={`${styles['chat-btn']} primary-btn`}
+            onClick={() => {
+              navigateToChat();
+            }}
+          >
+            Chat With Boodi
+          </button>
+        </p>
       </div>
     </div>
   );

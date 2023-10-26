@@ -1,1 +1,6 @@
-@use 'app/app.module.scss';
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+
+@use 'app/styles/normalize';
+@use 'app/styles/core-theme';
