@@ -69,6 +69,7 @@ export function Chat(props: ChatProps) {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            Origin: window.location.origin,
           },
           body: JSON.stringify({ suffering }),
         }
@@ -99,6 +100,7 @@ export function Chat(props: ChatProps) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Origin: window.location.origin,
         },
         body: JSON.stringify({ suffering }),
       });
