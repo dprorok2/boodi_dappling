@@ -69,9 +69,12 @@
   h1 {
     font-family: 'Permanent Marker', cursive;
     font-size: 30px;
-    margin: 24px 0 0 0;
     color: colors.$blueOxford;
     text-align: center;
+    background: colors.$blueOxford;
+    color: colors.$blueIce;
+    width: 100vw;
+    padding: 1rem;
   }
   h2 {
     font-family: 'Permanent Marker', cursive;
@@ -82,7 +85,7 @@
   }
   .boodi-message {
     width: 80%;
-    max-width: 400px;
+    max-width: 480px;
     font-family: 'Tilt Neon', sans-serif;
     font-size: 16px;
     font-style: italic;
@@ -92,16 +95,9 @@
     text-align: justify;
     color: colors.$blueOxford;
   }
-  textarea {
+  .worries-subtext {
     width: 80%;
-    max-width: 400px;
-    height: 200px;
-    margin-top: 16px;
-    border: 4px solid colors.$yellow3;
-    color: colors.$blueOxford;
-    background: colors.$yellow2;
-  }
-  .burden-subtext {
+    max-width: 480px;
     font-family: 'Tilt Neon', sans-serif;
     font-size: 16px;
     font-style: italic;
@@ -111,34 +107,31 @@
     text-align: justify;
     color: colors.$blueOxford;
   }
-  button {
-    height: 60px;
-    border: 0;
-    padding: 20px;
-    font-family: 'Permanent Marker', cursive;
-    font-size: 26px;
-    line-height: 20px;
-    margin: 0;
-    background: colors.$blueOxford;
-    color: colors.$blueIce;
-    &.truth-btn {
-      margin: 16px 0;
-    }
-    &:hover {
-      cursor: pointer;
-      filter: drop-shadow(0 0 10px colors.$blueIce);
+  textarea {
+    width: 80%;
+    max-width: 440px;
+    height: 200px;
+    margin: 2rem 0;
+    border: 4px solid colors.$yellow3;
+    color: colors.$blueOxford;
+    background: colors.$yellow2;
+    padding: 0.5rem;
+    &::placeholder {
+      color: colors.$blueOxford;
     }
   }
+
   .four-noble-truths {
-    width: 100%;
-    max-width: 570px;
+    width: 80%;
+    max-width: 440px;
+    margin-top: 2rem;
     background: colors.$blueOxford;
     h2 {
       color: colors.$yellow;
       margin-top: 36px;
     }
     .inner-content {
-      width: 80%;
+      width: 90%;
       max-width: 400px;
       margin: auto;
       font-family: 'Tilt Neon', sans-serif;
@@ -159,8 +152,8 @@
     }
   }
   .eightfold-path {
-    width: 100%;
-    max-width: 570px;
+    width: 80%;
+    max-width: 440px;
     background: colors.$blueOxford;
     margin: 2rem 0;
     h2 {
@@ -168,7 +161,7 @@
       margin-top: 36px;
     }
     .inner-content {
-      width: 80%;
+      width: 90%;
       max-width: 400px;
       margin: auto;
       font-family: 'Tilt Neon', sans-serif;

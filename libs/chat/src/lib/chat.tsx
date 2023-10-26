@@ -19,6 +19,9 @@ export function Chat(props: ChatProps) {
     };
   }, []);
 
+  const [truthBtnDisabled, setTruthBtnDisabled] = useState(false);
+  const [truthBtnText, setTruthBtnText] = useState('Show Me The Truth');
+
   const [currentUser, setCurrentuser] = useState<any>(null);
   const [suffering, setSuffering] = useState('');
   const [truths, setTruths] = useState('');
@@ -56,8 +59,30 @@ export function Chat(props: ChatProps) {
   };
 
   const showMeTheTruth = async () => {
-    getFourTruths();
-    getEightfoldPath();
+    setTruthBtnDisabled(true);
+    setTruthBtnTextRandomly();
+    try {
+      await Promise.all([getFourTruths(), getEightfoldPath()]);
+      resetShowMeTheTruthBtn();
+    } catch (error) {
+      console.error(error);
+    }
+    resetShowMeTheTruthBtn();
+  };
+
+  const setTruthBtnTextRandomly = () => {
+    const options = [
+      'Seeking Insights...',
+      'Channeling Wisdom...',
+      'Gathering Light...',
+    ];
+    const randomIndex = Math.floor(Math.random() * options.length);
+    setTruthBtnText(options[randomIndex]);
+  };
+
+  const resetShowMeTheTruthBtn = () => {
+    setTruthBtnDisabled(false);
+    setTruthBtnText('Show Me The Truth');
   };
 
   const getFourTruths = async () => {
@@ -145,9 +170,20 @@ export function Chat(props: ChatProps) {
           </span>
         </div>
       )}
+      {!currentUser && (
+        <button
+          className={`ghost-btn w-[100px] self-end`}
+          onClick={() => {
+            signIn();
+          }}
+        >
+          Sign in
+        </button>
+      )}
+
       <h1>
-        Message from <br />
-        Boodi, the Creator
+        A Message From: <br />
+        Boodi, The Enlightened Guide
       </h1>
       <p className={styles['boodi-message']}>
         "Dear traveler, in the vast expanse of the universe, you are a unique
@@ -158,30 +194,28 @@ export function Chat(props: ChatProps) {
         through the timeless wisdom of the Four Noble Truths, illuminating a
         path of liberation and peace."
       </p>
-      <p>
-        {!currentUser && (
-          <button
-            className={`${styles['gimme-btn']} primary-btn`}
-            onClick={() => {
-              signIn();
-            }}
-          >
-            Gimme That Boodi
-          </button>
-        )}
-      </p>
-      <h2>Share your burden</h2>
-      <p className={styles['burden-subtext']}>
-        Tell me what has been causing you stress?
+
+      <h2>Release Your Worries</h2>
+      <p className={`${styles['worries-subtext']} max-w-[570px]`}>
+        Put down what you’ve been carrying. Unburden your heart. Lighten your
+        load. Speak your silence. Tell me - what has been causing you stress?
       </p>
       <textarea
         placeholder="E.g., 'I'm overwhelmed with work and personal life.'"
         value={suffering}
         onChange={(e) => setSuffering(e.target.value)}
       ></textarea>
-      <button className={styles['truth-btn']} onClick={() => showMeTheTruth()}>
-        Show Me The Truth
-      </button>
+      <p className="max-w-[570px]">
+        <button
+          className={`${styles['truth-btn']} primary-btn ${
+            truthBtnDisabled ? 'disabled' : ''
+          }`}
+          onClick={() => showMeTheTruth()}
+          disabled={truthBtnDisabled}
+        >
+          {truthBtnText}
+        </button>
+      </p>
 
       {truths && eightfoldPath && (
         <>
