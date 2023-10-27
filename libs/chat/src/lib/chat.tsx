@@ -1,54 +1,73 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@boodi/auth';
 import DOMPurify from 'dompurify';
+import { SignInPopup } from '@boodi/auth';
 import styles from './chat.module.scss';
 
 /* eslint-disable-next-line */
 export interface ChatProps {}
 
 export function Chat(props: ChatProps) {
-  useEffect(() => {
-    document.body.classList.add(styles['chat']);
-    document.title = 'Boodi | Chat';
-
-    getUser();
-
-    return () => {
-      document.body.classList.remove(styles['chat']);
-    };
-  }, []);
-
   const [truthBtnDisabled, setTruthBtnDisabled] = useState(false);
   const [truthBtnText, setTruthBtnText] = useState('Show Me The Truth');
-
+  const [session, setSession] = useState<any>(null);
   const [currentUser, setCurrentuser] = useState<any>(null);
   const [suffering, setSuffering] = useState('');
   const [truths, setTruths] = useState('');
   const [eightfoldPath, setEightfoldPath] = useState('');
-  const navigate = useNavigate();
+  const [isVisibleSignInPopup, setIsVisibleSignInPopup] = useState(false);
 
-  const supabase = createClient(
-    import.meta.env.VITE_SUPABASE_URL,
-    import.meta.env.VITE_SUPABASE_ANON_KEY
-  );
+  useEffect(() => {
+    document.body.classList.add(styles['chat']);
+    document.title = 'Boodi | Chat';
+
+    // getSession();
+    // getUser();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session as any);
+    });
+
+    return () => {
+      document.body.classList.remove(styles['chat']);
+      subscription.unsubscribe();
+    };
+  }, []);
 
   const getUser = async () => {
-    const {
-      data: { user },
-      error,
-    } = await supabase.auth.getUser();
+    if (session) {
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser();
 
-    if (error) return;
-    setCurrentuser(user);
-    console.log(user);
+      if (error) return;
+      setCurrentuser(user);
+      console.log(user);
+    }
   };
 
-  const signIn = async () => {
+  const getSession = async () => {
+    const { data: session, error: sessionError } =
+      await supabase.auth.getSession();
+    setSession(session);
+
+    console.log('session-data', session);
+    console.log('session-error', sessionError);
+  };
+
+  const signInWithOAuth = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: 'https://boodi.ai/chat',
+        redirectTo: 'http://localhost:8888/chat',
+        //redirectTo: 'https://boodi.ai',
+        queryParams: {
+          access_type: 'offline',
+          prompt: 'consent',
+        },
       },
     });
   };
@@ -56,6 +75,22 @@ export function Chat(props: ChatProps) {
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
     if (!error) window.location.reload();
+  };
+
+  const toggleSignInPopup = () => {
+    setIsVisibleSignInPopup(true);
+  };
+
+  const refreshSession = async () => {
+    const { data, error } = await supabase.auth.refreshSession();
+    const { session, user } = data;
+    console.log('refreshed session', session, user);
+
+    // const { data: refreshed, error: refreshError } =
+    //   await supabase.auth.refreshSession();
+
+    // console.log('sessionrefresh-data', refreshed);
+    // console.log('sessionrefresh-error', refreshError);
   };
 
   const showMeTheTruth = async () => {
@@ -115,7 +150,7 @@ export function Chat(props: ChatProps) {
   const getEightfoldPath = async () => {
     //const domain = 'http://localhost:5000';
     const domain = 'https://boodi-proxy.replit.app';
-    const endpoint = currentUser
+    const endpoint = session
       ? '/eightfold-path-full'
       : '/eightfold-path-first-only';
 
@@ -143,43 +178,42 @@ export function Chat(props: ChatProps) {
   };
 
   return (
-    <div
-      className={`${styles['container']} ${currentUser ? '!mt-[4rem]' : ''}`}
-    >
-      {currentUser && (
-        <div className={styles['user-top-bar']}>
-          <img src={currentUser.user_metadata.picture} alt="Profile pic"></img>
+    <div className={`${styles['container']}`}>
+      <div className={styles['user-top-bar']}>
+        {/* <img src={session.user_metadata.picture} alt="Profile pic"></img>
 
           <span className={styles['full-name']}>
             {currentUser.user_metadata.full_name}
           </span>
-          <br />
+          <br /> 
 
-          {/* <span className={styles['email']}>
+          <span className={styles['email']}>
             {currentUser.user_metadata.email}
           </span> */}
+        {session && (
+          <button
+            className={`ghost-btn w-[100px] h-[20px] self-end`}
+            onClick={() => {
+              signOut();
+            }}
+          >
+            Sign out
+          </button>
+        )}
 
-          <span className={styles['signout']}>
-            <span
-              onClick={() => {
-                signOut();
-              }}
-            >
-              Sign out
-            </span>
-          </span>
-        </div>
-      )}
-      {!currentUser && (
-        <button
-          className={`ghost-btn w-[100px] self-end`}
-          onClick={() => {
-            signIn();
-          }}
-        >
-          Sign in
-        </button>
-      )}
+        {!session && (
+          <button
+            className={`ghost-btn w-[100px] h-[20px] self-end`}
+            onClick={() => {
+              //signInWithEmail();
+              //signInWithOAuth();
+              toggleSignInPopup();
+            }}
+          >
+            Sign in
+          </button>
+        )}
+      </div>
 
       <h1>
         A Message From: <br />
@@ -235,25 +269,17 @@ export function Chat(props: ChatProps) {
                 __html: DOMPurify.sanitize(eightfoldPath),
               }}
             ></div>
-            {!currentUser && (
+            {!session && (
               <div className={styles['create-free-account']}>
                 <p>
                   To access steps 2 &ndash; 8, <br />
                   create a free account.
                 </p>
-                {/* <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="you@example.com"
-              value={emailInput}
-              onChange={(e) => setEmailInput(e.target.value)}
-              onKeyDown={(e) => handleKeyDown(e)}
-            /> */}
+
                 <button
                   className={`${styles['gimme-btn']} primary-btn`}
                   onClick={() => {
-                    signIn();
+                    toggleSignInPopup();
                   }}
                 >
                   Gimme That Boodi
@@ -275,6 +301,11 @@ export function Chat(props: ChatProps) {
           Find a coach
         </a>
       </div>
+      {isVisibleSignInPopup && (
+        <SignInPopup
+          closePopup={() => setIsVisibleSignInPopup(false)}
+        ></SignInPopup>
+      )}
     </div>
   );
 }
