@@ -290,6 +290,11 @@ export function Chat(props: ChatProps) {
               >
                 Gimme That Boodi
               </button>
+              {userDidSignUp && (
+                <p className={`mt-5`}>
+                  <strong>You've signed up! Please check your email.</strong>
+                </p>
+              )}
             </div>
           )}
         </>
