@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nx serve",
     "replit": "nx serve",
-    "build": "nx build",
+    "build": "nx build && cp apps/boodi/_redirects dist/boodi/",
     "test:spec": "nx test",
     "test:e2e": "nx e2e e2e --watch --browser=chrome",
     "test:e2e-headless": "nx e2e e2e"
