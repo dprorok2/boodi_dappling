@@ -32,13 +32,14 @@
   align-items: center;
   margin: 0 auto;
   .user-top-bar {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     height: 4rem;
     padding: 0.5rem;
     width: 100vw;
     background: colors.$blueOxford;
+    background: transparent;
     text-align: right;
     .full-name {
       display: inline-block;
@@ -54,11 +55,6 @@
     }
     .signout {
       display: inline-block;
-      padding: 0rem 1rem 0 0;
-      font-size: 14px;
-      font-weight: 500;
-      color: colors.$gray1;
-      cursor: pointer;
     }
     img {
       float: right;
