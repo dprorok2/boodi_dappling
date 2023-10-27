@@ -8,17 +8,6 @@ import styles from './app.module.scss';
 export function App() {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    replitUrlRewrite();
-  }, []);
-
-  const replitUrlRewrite = () => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const route = searchParams.get('route');
-
-    if (route) navigate(route, { replace: true });
-  };
-
   return (
     <Routes>
       <Route path="/" element={<Welcome />} />
