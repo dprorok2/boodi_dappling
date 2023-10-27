@@ -12,9 +12,11 @@ export function Chat(props: ChatProps) {
   const [truthBtnText, setTruthBtnText] = useState('Show Me The Truth');
   const [session, setSession] = useState<any>(null);
   const [currentUser, setCurrentuser] = useState<any>(null);
+  const [userDidSignUp, setUserDidSignUp] = useState(false);
   const [suffering, setSuffering] = useState('');
   const [truths, setTruths] = useState('');
-  const [eightfoldPath, setEightfoldPath] = useState('');
+  const [eightfoldPathFirstOnly, setEightfoldPathFirstOnly] = useState('');
+  const [eightfoldPathFull, setEightfoldPathFull] = useState('');
   const [isVisibleSignInPopup, setIsVisibleSignInPopup] = useState(false);
 
   useEffect(() => {
@@ -93,11 +95,11 @@ export function Chat(props: ChatProps) {
     // console.log('sessionrefresh-error', refreshError);
   };
 
-  const showMeTheTruth = async () => {
+  const showMeTheTruth = async (fullPath = false) => {
     setTruthBtnDisabled(true);
     setTruthBtnTextRandomly();
     try {
-      await Promise.all([getFourTruths(), getEightfoldPath()]);
+      await Promise.all([getFourTruths(), getEightfoldPath(fullPath)]);
       resetShowMeTheTruthBtn();
     } catch (error) {
       console.error(error);
@@ -147,14 +149,12 @@ export function Chat(props: ChatProps) {
     }
   };
 
-  const getEightfoldPath = async () => {
+  const getEightfoldPath = async (full = false) => {
     //const domain = 'http://localhost:5000';
     const domain = 'https://boodi-proxy.replit.app';
-    const endpoint = session
-      ? '/eightfold-path-full'
-      : '/eightfold-path-first-only';
-
+    const endpoint = '/eightfold-path-full';
     const url = `${domain}${endpoint}`;
+
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -168,7 +168,7 @@ export function Chat(props: ChatProps) {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        setEightfoldPath(data.result);
+        setEightfoldPathFull(data.result);
       } else {
         throw new Error(`Request failed with status ${response.status}`);
       }
@@ -251,7 +251,7 @@ export function Chat(props: ChatProps) {
         </button>
       </p>
 
-      {truths && eightfoldPath && (
+      {truths && eightfoldPathFull && (
         <>
           <div className={styles['four-noble-truths']}>
             <h2>The Four Noble Truths</h2>
@@ -263,30 +263,35 @@ export function Chat(props: ChatProps) {
 
           <div className={styles['eightfold-path']}>
             <h2>The Noble Eightfold Path</h2>
+
             <div
               className={styles['inner-content']}
               dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(eightfoldPath),
+                __html: DOMPurify.sanitize(eightfoldPathFull),
               }}
             ></div>
-            {!session && (
-              <div className={styles['create-free-account']}>
-                <p>
-                  To access steps 2 &ndash; 8, <br />
-                  create a free account.
-                </p>
-
-                <button
-                  className={`${styles['gimme-btn']} primary-btn`}
-                  onClick={() => {
-                    toggleSignInPopup();
-                  }}
-                >
-                  Gimme That Boodi
-                </button>
-              </div>
-            )}
           </div>
+          {!session && (
+            <div className={styles['create-free-account']}>
+              <p>
+                Create your free account to unlock
+                <br />
+                your journey with Boodi.
+                <br />
+                <br />
+                We are just getting started :)
+              </p>
+
+              <button
+                className={`${styles['gimme-btn']} primary-btn`}
+                onClick={() => {
+                  toggleSignInPopup();
+                }}
+              >
+                Gimme That Boodi
+              </button>
+            </div>
+          )}
         </>
       )}
 
@@ -304,6 +309,7 @@ export function Chat(props: ChatProps) {
       {isVisibleSignInPopup && (
         <SignInPopup
           closePopup={() => setIsVisibleSignInPopup(false)}
+          isSignUp={() => setUserDidSignUp(true)}
         ></SignInPopup>
       )}
     </div>

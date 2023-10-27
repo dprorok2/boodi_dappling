@@ -10,6 +10,7 @@ const supabase = createClient(
 /* eslint-disable-next-line */
 export interface SignInPopupProps {
   closePopup: () => void;
+  isSignUp: () => void;
 }
 
 export function SignInPopup(props: SignInPopupProps) {
@@ -37,6 +38,7 @@ export function SignInPopup(props: SignInPopupProps) {
 
   const signUpWithEmail = async () => {
     closePopup();
+    props.isSignUp();
     await supabase.auth.signUp({ email, password });
   };
 

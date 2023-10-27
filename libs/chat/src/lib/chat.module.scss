@@ -64,7 +64,7 @@
   }
   h1 {
     font-family: 'Permanent Marker', cursive;
-    font-size: 30px;
+    font-size: 2rem;
     color: colors.$blueOxford;
     text-align: center;
     background: colors.$blueOxford;
@@ -74,8 +74,9 @@
   }
   h2 {
     font-family: 'Permanent Marker', cursive;
-    font-size: 30px;
-    margin: 24px 0 0 0;
+    font-size: 2rem;
+    margin: 1.5rem 0 0 0;
+    padding: 1rem;
     color: colors.$blueOxford;
     text-align: center;
   }
@@ -151,7 +152,7 @@
     width: 80%;
     max-width: 440px;
     background: colors.$blueOxford;
-    margin: 2rem 0;
+    margin: 2rem 0 0 0;
     h2 {
       color: colors.$yellow;
       margin-top: 36px;
@@ -176,27 +177,24 @@
         margin-bottom: 1rem;
       }
     }
-    .create-free-account {
-      height: 200px;
-      width: 80%;
-      margin: 48px auto;
-      background: radial-gradient(
-        circle at 140% 140%,
-        colors.$pink,
-        colors.$pink2 10%,
-        colors.$yellow 60%,
-        colors.$orange 100%,
-        colors.$yellow 200%
-      );
-      filter: drop-shadow(14px 14px 0px colors.$blueOxford)
-        drop-shadow(14px 14px 7px colors.$teal)
-        drop-shadow(0px 0px 20px colors.$blueIce);
-      p {
-        color: colors.$blueOxford;
-        font-size: 26px;
-        text-align: center;
-        padding: 24px 0;
-      }
+  }
+  .create-free-account {
+    height: 200px;
+    width: 80%;
+    margin: 2rem auto;
+    background: colors.$blueIce;
+    background: transparent;
+    text-align: center;
+    p {
+      color: colors.$blueOxford;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.25rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .gimme-btn {
+      width: auto;
     }
   }
 }
