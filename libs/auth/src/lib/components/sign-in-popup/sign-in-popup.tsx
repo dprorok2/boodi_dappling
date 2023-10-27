@@ -24,12 +24,8 @@ export function SignInPopup(props: SignInPopupProps) {
     };
   }, []);
 
-  const closePopup = () => {
-    props.closePopup();
-  };
-
   const signInWithEmail = async () => {
-    closePopup();
+    props.closePopup();
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
@@ -37,7 +33,7 @@ export function SignInPopup(props: SignInPopupProps) {
   };
 
   const signUpWithEmail = async () => {
-    closePopup();
+    props.closePopup();
     props.isSignUp();
     await supabase.auth.signUp({ email, password });
   };
@@ -46,7 +42,7 @@ export function SignInPopup(props: SignInPopupProps) {
     <div className={styles['sign-in-popup']}>
       <div className={`${styles['card']}`}>
         <div className={`${styles['inner-content']}`}>
-          <span className={`${styles['close-btn']}`} onClick={closePopup}>
+          <span className={`${styles['close-btn']}`} onClick={props.closePopup}>
             X
           </span>
           <label htmlFor={'email'}>Email</label>
