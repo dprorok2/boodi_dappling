@@ -125,7 +125,7 @@ export function Chat(props: ChatProps) {
   const getFourTruths = async () => {
     try {
       const response = await fetch(
-        //'http://localhost:5000/four-noble-truths',
+        //'http://localhost:1104/four-noble-truths',
         'https://boodi-proxy.replit.app/four-noble-truths',
         {
           method: 'POST',
@@ -150,9 +150,9 @@ export function Chat(props: ChatProps) {
   };
 
   const getEightfoldPath = async (full = false) => {
-    //const domain = 'http://localhost:5000';
+    //const domain = 'http://localhost:1104';
     const domain = 'https://boodi-proxy.replit.app';
-    const endpoint = '/eightfold-path-full';
+    const endpoint = '/eightfold-path/full';
     const url = `${domain}${endpoint}`;
 
     try {
