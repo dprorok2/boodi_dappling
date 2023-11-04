@@ -64,8 +64,8 @@ export function Chat(props: ChatProps) {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: 'http://localhost:8888/chat',
-        //redirectTo: 'https://boodi.ai',
+        //redirectTo: 'http://localhost:8888/chat',
+        redirectTo: 'https://boodi.ai',
         queryParams: {
           access_type: 'offline',
           prompt: 'consent',
@@ -99,12 +99,15 @@ export function Chat(props: ChatProps) {
     setTruthBtnDisabled(true);
     setTruthBtnTextRandomly();
     try {
-      await Promise.all([getFourTruths(), getEightfoldPath(fullPath)]);
-      resetShowMeTheTruthBtn();
+      await getFourTruths();
+      await getEightfoldPath(fullPath);
+      setTruthBtnText('');
+      //resetShowMeTheTruthBtn();
     } catch (error) {
       console.error(error);
     }
-    resetShowMeTheTruthBtn();
+    setTruthBtnText('');
+    //resetShowMeTheTruthBtn();
   };
 
   const setTruthBtnTextRandomly = () => {
@@ -123,26 +126,32 @@ export function Chat(props: ChatProps) {
   };
 
   const getFourTruths = async () => {
-    try {
-      const response = await fetch(
-        //'http://localhost:1104/four-noble-truths',
-        'https://boodi-proxy.replit.app/four-noble-truths',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Origin: window.location.origin,
-          },
-          body: JSON.stringify({ suffering }),
-        }
-      );
+    //const url2 = 'http://localhost:1104/four-noble-truths';
+    const url = 'https://boodi-proxy.replit.app/four-noble-truths';
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        setTruths(data.result);
-      } else {
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ suffering }),
+      });
+
+      if (!response.ok || !response.body) {
         throw new Error(`Request failed with status ${response.status}`);
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      const loopRunner = true;
+
+      while (loopRunner) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        const decodedChunk = decoder.decode(value, { stream: true });
+        setTruths((truths) => truths + decodedChunk);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -152,25 +161,32 @@ export function Chat(props: ChatProps) {
   const getEightfoldPath = async (full = false) => {
     //const domain = 'http://localhost:1104';
     const domain = 'https://boodi-proxy.replit.app';
-    const endpoint = '/eightfold-path/full';
+    const endpoint = '/eightfold-path/full-streaming';
     const url = `${domain}${endpoint}`;
 
     try {
       const response = await fetch(url, {
         method: 'POST',
         headers: {
+          Accept: 'application/json, text/plain, */*',
           'Content-Type': 'application/json',
-          Origin: window.location.origin,
         },
         body: JSON.stringify({ suffering }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        setEightfoldPathFull(data.result);
-      } else {
+      if (!response.ok || !response.body) {
         throw new Error(`Request failed with status ${response.status}`);
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      const loopRunner = true;
+
+      while (loopRunner) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        const decodedChunk = decoder.decode(value, { stream: true });
+        setEightfoldPathFull((eightfoldPath) => eightfoldPath + decodedChunk);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -251,53 +267,54 @@ export function Chat(props: ChatProps) {
         </button>
       </p>
 
-      {truths && eightfoldPathFull && (
-        <>
-          <div className={styles['four-noble-truths']}>
-            <h2>The Four Noble Truths</h2>
-            <div
-              className={styles['inner-content']}
-              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truths) }}
-            ></div>
-          </div>
+      {truths && (
+        <div className={styles['four-noble-truths']}>
+          <h2>The Four Noble Truths</h2>
+          <div
+            className={styles['inner-content']}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(truths) }}
+          ></div>
+        </div>
+      )}
 
-          <div className={styles['eightfold-path']}>
-            <h2>The Noble Eightfold Path</h2>
+      {eightfoldPathFull && (
+        <div className={styles['eightfold-path']}>
+          <h2>The Noble Eightfold Path</h2>
 
-            <div
-              className={styles['inner-content']}
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(eightfoldPathFull),
-              }}
-            ></div>
-          </div>
-          {!session && (
-            <div className={styles['create-free-account']}>
-              <p>
-                Create your free account to unlock
-                <br />
-                your journey with Boodi.
-                <br />
-                <br />
-                We are just getting started :)
-              </p>
+          <div
+            className={styles['inner-content']}
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(eightfoldPathFull),
+            }}
+          ></div>
+        </div>
+      )}
 
-              <button
-                className={`${styles['gimme-btn']} primary-btn`}
-                onClick={() => {
-                  toggleSignInPopup();
-                }}
-              >
-                Gimme That Boodi
-              </button>
-              {userDidSignUp && (
-                <p className={`mt-5`}>
-                  <strong>You've signed up! Please check your email.</strong>
-                </p>
-              )}
-            </div>
+      {truths && eightfoldPathFull && !session && (
+        <div className={styles['create-free-account']}>
+          <p>
+            Create your free account to unlock
+            <br />
+            your journey with Boodi.
+            <br />
+            <br />
+            We are just getting started :)
+          </p>
+
+          <button
+            className={`${styles['gimme-btn']} primary-btn`}
+            onClick={() => {
+              toggleSignInPopup();
+            }}
+          >
+            Gimme That Boodi
+          </button>
+          {userDidSignUp && (
+            <p className={`mt-5`}>
+              <strong>You've signed up! Please check your email.</strong>
+            </p>
           )}
-        </>
+        </div>
       )}
 
       <div className={styles['footer-links']}>
