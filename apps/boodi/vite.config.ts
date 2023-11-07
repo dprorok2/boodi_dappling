@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import VitePluginAlias from 'vite-plugin-alias';
+import path from 'path';
 
 export default defineConfig({
   cacheDir: './node_modules/.vite/boodi',
@@ -31,6 +32,12 @@ export default defineConfig({
     //   ],
     // }),
   ],
+
+  // resolve: {
+  //   alias: {
+  //     '@': path.resolve(__dirname, './src'),
+  //   },
+  // },
 
   test: {
     globals: true,
