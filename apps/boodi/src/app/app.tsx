@@ -5,7 +5,7 @@ import { Chat } from '@boodi/chat';
 
 export function App() {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/chat" element={<Chat />} />
