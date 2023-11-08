@@ -1,8 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
-import VitePluginAlias from 'vite-plugin-alias';
-import path from 'path';
 
 export default defineConfig({
   cacheDir: './node_modules/.vite/boodi',
@@ -17,27 +15,7 @@ export default defineConfig({
     host: 'localhost',
   },
 
-  plugins: [
-    react(),
-    nxViteTsPaths(),
-    // VitePluginAlias({
-    //   entries: [
-    //     {
-    //       find: '@boodi/colors',
-    //       replacement: path.resolve(
-    //         __dirname,
-    //         '../boodi/src/app/styles/_colors.scss'
-    //       ),
-    //     },
-    //   ],
-    // }),
-  ],
-
-  // resolve: {
-  //   alias: {
-  //     '@': path.resolve(__dirname, './src'),
-  //   },
-  // },
+  plugins: [react(), nxViteTsPaths()],
 
   test: {
     globals: true,

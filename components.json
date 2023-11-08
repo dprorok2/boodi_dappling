@@ -10,7 +10,7 @@
     "cssVariables": false
   },
   "aliases": {
-    "components": "@boodi/components/components",
-    "utils": "@boodi/utils"
+    "components": "@boodi/ui",
+    "utils": "@boodi/ui/utils"
   }
 }
