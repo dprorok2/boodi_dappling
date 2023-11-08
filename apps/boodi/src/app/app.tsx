@@ -1,18 +1,16 @@
-import { useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import { ThemeProvider } from '@boodi/ui/theme-provider';
 import { Welcome } from '@boodi/welcome';
 import { Chat } from '@boodi/chat';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.scss';
 
 export function App() {
-  const navigate = useNavigate();
-
   return (
-    <Routes>
-      <Route path="/" element={<Welcome />} />
-      <Route path="/chat" element={<Chat />} />
-    </Routes>
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+      <Routes>
+        <Route path="/" element={<Welcome />} />
+        <Route path="/chat" element={<Chat />} />
+      </Routes>{' '}
+    </ThemeProvider>
   );
 }
 
