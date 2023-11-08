@@ -15,9 +15,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@boodi/ui/*": ["libs/ui/src/lib/*"],
       "@boodi/auth": ["libs/auth/src/index.ts"],
       "@boodi/chat": ["libs/chat/src/index.ts"],
+      "@boodi/services": ["libs/services/src/index.ts"],
+      "@boodi/services/*": ["libs/services/src/*"],
+      "@boodi/ui/*": ["libs/ui/src/lib/*"],
       "@boodi/welcome": ["libs/welcome/src/index.ts"]
     },
     "jsx": "react-jsx"

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@boodi/auth';
 import DOMPurify from 'dompurify';
 import { SignInPopup } from '@boodi/auth';
+import { API_URLS } from '@boodi/services/api-urls';
 import styles from './chat.module.scss';
 
 /* eslint-disable-next-line */
@@ -47,7 +48,7 @@ export function Chat(props: ChatProps) {
 
       if (error) return;
       setCurrentuser(user);
-      console.log(user);
+      //console.log(user);
     }
   };
 
@@ -56,8 +57,8 @@ export function Chat(props: ChatProps) {
       await supabase.auth.getSession();
     setSession(session);
 
-    console.log('session-data', session);
-    console.log('session-error', sessionError);
+    // console.log('session-data', session);
+    // console.log('session-error', sessionError);
   };
 
   const signInWithOAuth = async () => {
@@ -99,7 +100,7 @@ export function Chat(props: ChatProps) {
     setTruthBtnDisabled(true);
     setTruthBtnTextRandomly();
     try {
-      await getFourTruths();
+      await getFourTruths_ws();
       await getEightfoldPath(fullPath);
       setTruthBtnText('');
       //resetShowMeTheTruthBtn();
@@ -126,8 +127,7 @@ export function Chat(props: ChatProps) {
   };
 
   const getFourTruths = async () => {
-    //const url2 = 'http://localhost:1104/four-noble-truths';
-    const url = 'https://boodi-proxy.replit.app/four-noble-truths';
+    const url = API_URLS.proxy.fourNobleTruths;
 
     try {
       const response = await fetch(url, {
@@ -156,6 +156,29 @@ export function Chat(props: ChatProps) {
     } catch (error) {
       console.error('Error:', error);
     }
+  };
+
+  const getFourTruths_ws = () => {
+    const url = API_URLS.proxy.fourNobleTruths;
+    const socket = new WebSocket(url);
+
+    socket.onopen = () => {
+      const request = JSON.stringify({ suffering });
+      socket.send(request);
+    };
+
+    socket.onmessage = (e) => {
+      console.log('Socket message', e);
+      setTruths((truths) => truths + e.data);
+    };
+
+    socket.onclose = (e) => {
+      console.log('Socket closed', e.code, e.reason);
+    };
+
+    socket.onerror = (err) => {
+      console.error('Websocket error:', err);
+    };
   };
 
   const getEightfoldPath = async (full = false) => {
@@ -208,7 +231,7 @@ export function Chat(props: ChatProps) {
           </span> */}
         {session && (
           <button
-            className={`ghost-btn w-[100px] h-[20px] self-end`}
+            className={`${styles['ghost-btn']} w-[100px] h-[20px] self-end`}
             onClick={() => {
               signOut();
             }}
@@ -219,7 +242,7 @@ export function Chat(props: ChatProps) {
 
         {!session && (
           <button
-            className={`ghost-btn w-[100px] h-[20px] self-end`}
+            className={`${styles['ghost-btn']} w-[100px] h-[20px] self-end`}
             onClick={() => {
               //signInWithEmail();
               //signInWithOAuth();
@@ -257,8 +280,8 @@ export function Chat(props: ChatProps) {
       ></textarea>
       <p className="max-w-[570px]">
         <button
-          className={`${styles['truth-btn']} primary-btn ${
-            truthBtnDisabled ? 'disabled' : ''
+          className={`${styles['primary-btn']} ${
+            truthBtnDisabled ? styles['disabled'] : ''
           }`}
           onClick={() => showMeTheTruth()}
           disabled={truthBtnDisabled}
@@ -268,7 +291,14 @@ export function Chat(props: ChatProps) {
       </p>
 
       {truths && (
-        <div className={styles['four-noble-truths']}>
+        <div className={`${styles['four-noble-truths']}`}>
+          <div className={`${styles['inner-content']} !mb-0 !pb-0`}>
+            <p className="italic mb-0">
+              It's okay to acknowledge the discomfort of stress. It's temporary
+              and your body is doing its best to heal in many ways right now.
+            </p>
+          </div>
+
           <h2>The Four Noble Truths</h2>
           <div
             className={styles['inner-content']}
@@ -302,7 +332,7 @@ export function Chat(props: ChatProps) {
           </p>
 
           <button
-            className={`${styles['gimme-btn']} primary-btn`}
+            className={`${styles['primary-btn']} w-auto`}
             onClick={() => {
               toggleSignInPopup();
             }}

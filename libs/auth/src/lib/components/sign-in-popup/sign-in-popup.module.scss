@@ -67,3 +67,45 @@
     }
   }
 }
+
+button {
+  width: 100%;
+  height: 60px;
+  border: 0;
+  padding: 1rem;
+  margin: 0;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1.5rem;
+  line-height: 1rem;
+  cursor: pointer;
+  &.primary-btn {
+    background: colors.$blueOxford;
+    color: colors.$blueIce;
+    border: 4px solid colors.$blueIce;
+    &:hover {
+      filter: drop-shadow(0 0 0.5rem colors.$blueIce);
+    }
+    &.disabled {
+      background: transparent;
+      border: 4px solid transparent;
+      color: colors.$blueOxford;
+    }
+    &.disabled:hover {
+      filter: none;
+    }
+  }
+  &.ghost-btn {
+    font-family: 'Tilt Neon', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    background: transparent;
+    color: colors.$blueOxford;
+    border: 0;
+    &:hover {
+      filter: drop-shadow(0 0 0.5rem colors.$blueIce);
+    }
+    &.disabled {
+      background: gray;
+    }
+  }
+}
