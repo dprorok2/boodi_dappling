@@ -182,10 +182,7 @@ export function Chat(props: ChatProps) {
   };
 
   const getEightfoldPath = async (full = false) => {
-    //const domain = 'http://localhost:1104';
-    const domain = 'https://boodi-proxy.replit.app';
-    const endpoint = '/eightfold-path/full-streaming';
-    const url = `${domain}${endpoint}`;
+    const url = API_URLS.proxy.eightfoldPathFullStreaming;
 
     try {
       const response = await fetch(url, {
