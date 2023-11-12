@@ -1,7 +1,7 @@
 {
   "name": "boodi",
   "$schema": "node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "./src",
+  "sourceRoot": "apps/boodi/src",
   "projectType": "application",
   "targets": {
     "build": {

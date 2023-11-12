@@ -31,7 +31,7 @@ export function Welcome(props: WelcomeProps) {
       <div className={`${styles['content']}`}>
         <p className="w-full">
           <button
-            className={`${styles['chat-btn']} primary-btn`}
+            className={`${styles['primary-btn']}`}
             onClick={() => {
               navigateToChat();
             }}
@@ -80,7 +80,7 @@ export function Welcome(props: WelcomeProps) {
         {' '}
         <p className="w-full">
           <button
-            className={`${styles['chat-btn']} primary-btn`}
+            className={`${styles['primary-btn']}`}
             onClick={() => {
               navigateToChat();
             }}

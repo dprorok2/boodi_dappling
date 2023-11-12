@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from '@boodi/ui/theme-provider';
 import { Welcome } from '@boodi/welcome';
 import { Chat } from '@boodi/chat';
+import Xoxo from './pages/xoxo/xoxo';
 
 export function App() {
   return (
@@ -9,7 +10,8 @@ export function App() {
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/chat" element={<Chat />} />
-      </Routes>{' '}
+        <Route path="/xoxo" element={<Xoxo />} />
+      </Routes>
     </ThemeProvider>
   );
 }

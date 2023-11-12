@@ -1,223 +1,257 @@
 @use '../../../../apps/boodi/src/app/styles/colors';
 
-.chat {
+body.chat {
   font-family: 'Tilt Neon', sans-serif;
   color: colors.$white;
-  background: radial-gradient(
-    circle at top center,
-    colors.$yellow 0%,
-    colors.$orange 10%,
-    colors.$yellow 30%,
-    colors.$orange
-  );
-  background: radial-gradient(
-    circle at center right,
-    colors.$pink,
-    colors.$pink2 10%,
-    colors.$yellow 60%,
-    colors.$orange 80%,
-    colors.$yellow 100%
-  );
   overflow-x: hidden;
-}
+  background: radial-gradient(
+      circle at 50% 50%,
+      colors.$yellow 0%,
+      colors.$orange 40%,
+      colors.$yellow 70%,
+      colors.$orange 110%
+    )
+    fixed;
+  background-blend-mode: soft-light;
 
-.container {
-  width: 100%;
-  max-width: 800px;
-  height: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  .user-top-bar {
-    position: relative;
-    top: 0;
-    left: 0;
-    height: 4rem;
-    padding: 0.5rem;
-    width: 100vw;
-    background: colors.$blueOxford;
-    background: transparent;
-    text-align: right;
-    .full-name {
-      display: inline-block;
-      padding-right: 1rem;
-      padding-top: 0.25rem;
-      color: colors.$white;
-    }
-    .email {
-      display: inline-block;
-      padding-right: 1rem;
-      font-size: 12px;
-      color: colors.$gray1;
-    }
-    .signout {
-      display: inline-block;
-    }
-    img {
-      float: right;
-      width: 3rem;
-      height: auto;
-    }
-  }
-  h1 {
-    font-family: 'Permanent Marker', cursive;
-    font-size: 2rem;
-    text-align: center;
-    background: colors.$blueOxford;
-    color: colors.$blueIce;
-    width: 100vw;
-    padding: 1rem;
-  }
-  h2 {
-    font-family: 'Permanent Marker', cursive;
-    font-size: 2rem;
-    margin: 1.5rem 0 0 0;
-    padding: 1rem;
-    color: colors.$blueOxford;
-    text-align: center;
-  }
-  .boodi-message {
-    width: 80%;
-    max-width: 480px;
-    font-family: 'Tilt Neon', sans-serif;
-    font-size: 16px;
-    font-style: italic;
-    margin: 24px 0 0 0;
-    padding: 0 20px;
-    line-height: 22px;
-    text-align: justify;
-    color: colors.$blueOxford;
-  }
-  .worries-subtext {
-    width: 80%;
-    max-width: 480px;
-    font-family: 'Tilt Neon', sans-serif;
-    font-size: 16px;
-    font-style: italic;
-    margin: 10px 0 0 0;
-    padding: 0 20px;
-    line-height: 22px;
-    text-align: justify;
-    color: colors.$blueOxford;
-  }
-  textarea {
-    width: 80%;
-    max-width: 440px;
-    height: 200px;
-    margin: 2rem 0;
-    border: 4px solid colors.$yellow3;
-    color: colors.$blueOxford;
-    background: colors.$yellow2;
-    padding: 0.5rem;
-    &::placeholder {
-      color: colors.$blueOxford;
-    }
-  }
-
-  .four-noble-truths {
-    width: 80%;
-    max-width: 440px;
-    margin-top: 2rem;
-    background: colors.$blueOxford;
-    h2 {
-      color: colors.$yellow;
-      margin-top: 36px;
-    }
-    .inner-content {
-      width: 90%;
-      max-width: 400px;
-      margin: auto;
-      font-family: 'Tilt Neon', sans-serif;
-      font-size: 20px;
-      font-style: normal;
-      margin: 10px auto 0 auto;
-      padding: 20px;
-      line-height: 28px;
-      text-align: left;
-      color: colors.$gray1;
-      h3 {
-        margin-bottom: 1rem;
-        font-weight: 800;
+  .container {
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    .user-top-bar {
+      position: relative;
+      top: 0;
+      left: 0;
+      height: 4rem;
+      padding: 0.5rem;
+      width: 100vw;
+      background: colors.$blueOxford;
+      background: transparent;
+      text-align: right;
+      .full-name {
+        display: inline-block;
+        padding-right: 1rem;
+        padding-top: 0.25rem;
+        color: colors.$white;
       }
-      p {
-        margin-bottom: 1rem;
+      .email {
+        display: inline-block;
+        padding-right: 1rem;
+        font-size: 12px;
+        color: colors.$gray1;
+      }
+      .signout {
+        display: inline-block;
+      }
+      img {
+        float: right;
+        width: 3rem;
+        height: auto;
       }
     }
-  }
-  .eightfold-path {
-    width: 80%;
-    max-width: 440px;
-    background: colors.$blueOxford;
-    margin: 2rem 0 0 0;
-    h2 {
-      color: colors.$yellow;
-      margin-top: 36px;
-    }
-    .inner-content {
-      width: 90%;
-      max-width: 400px;
-      margin: auto;
-      font-family: 'Tilt Neon', sans-serif;
-      font-size: 20px;
-      font-style: normal;
-      margin: 10px auto 0 auto;
-      padding: 20px;
-      line-height: 28px;
-      text-align: left;
-      color: colors.$gray1;
-      h3 {
-        margin-bottom: 1rem;
-        font-weight: 800;
-      }
-      p {
-        margin-bottom: 1rem;
-      }
-    }
-  }
-  .create-free-account {
-    height: 200px;
-    width: 80%;
-    margin: 2rem auto;
-    background: colors.$blueIce;
-    background: transparent;
-    text-align: center;
-    p {
-      color: colors.$blueOxford;
-      font-size: 1rem;
-      font-weight: 400;
-      line-height: 1.25rem;
+    h1 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 2rem;
       text-align: center;
-      margin-bottom: 2rem;
-    }
-    .gimme-btn {
-      width: auto;
-    }
-  }
-}
-.footer-links {
-  width: 100%;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-around;
-  align-items: center;
-  padding: 20px;
-  a {
-    color: colors.$blueOxford;
-    padding: 8px 20px 10px 20px;
-    font-size: 20px;
-    height: 40px;
-    line-height: 20px;
-    &:hover {
       background: colors.$blueOxford;
       color: colors.$blueIce;
-      border: 2px solid colors.$blueIce;
-      filter: drop-shadow(0 0 0.5rem colors.$blueIce);
+      width: 100vw;
+      padding: 1rem;
+    }
+    h2 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 2rem;
+      margin: 1.5rem 0 0 0;
+      padding: 1rem;
+      color: colors.$blueOxford;
+      text-align: center;
+    }
+    .boodi-message {
+      width: 80%;
+      max-width: 480px;
+      font-family: 'Tilt Neon', sans-serif;
+      font-size: 16px;
+      font-style: italic;
+      margin: 24px 0 0 0;
+      padding: 0 20px;
+      line-height: 22px;
+      text-align: justify;
+      color: colors.$blueOxford;
+    }
+    .worries-subtext {
+      width: 80%;
+      max-width: 480px;
+      font-family: 'Tilt Neon', sans-serif;
+      font-size: 16px;
+      font-style: italic;
+      margin: 10px 0 0 0;
+      padding: 0 20px;
+      line-height: 22px;
+      text-align: justify;
+      color: colors.$blueOxford;
+    }
+    textarea {
+      width: 80%;
+      max-width: 440px;
+      height: 200px;
+      margin: 2rem 0;
+      border: 4px solid colors.$yellow3;
+      color: colors.$blueOxford;
+      background: colors.$yellow2;
+      padding: 0.5rem;
+      &::placeholder {
+        color: colors.$blueOxford;
+      }
+    }
+
+    .four-noble-truths {
+      width: 80%;
+      max-width: 440px;
+      margin-top: 2rem;
+      background: colors.$blueOxford;
+      h2 {
+        color: colors.$yellow;
+        margin-top: 36px;
+      }
+      .inner-content,
+      .intro-content {
+        width: 90%;
+        max-width: 400px;
+        margin: auto;
+        font-family: 'Tilt Neon', sans-serif;
+        font-size: 20px;
+        font-style: normal;
+        margin: 10px auto 0 auto;
+        padding: 20px;
+        line-height: 28px;
+        text-align: left;
+        color: colors.$gray1;
+        h3 {
+          margin-bottom: 1rem;
+          font-weight: 800;
+        }
+        p {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+    .eightfold-path {
+      width: 80%;
+      max-width: 440px;
+      background: colors.$blueOxford;
+      margin: 2rem 0 0 0;
+      h2 {
+        color: colors.$yellow;
+        margin-top: 36px;
+      }
+      .inner-content {
+        width: 90%;
+        max-width: 400px;
+        margin: auto;
+        font-family: 'Tilt Neon', sans-serif;
+        font-size: 20px;
+        font-style: normal;
+        margin: 10px auto 0 auto;
+        padding: 20px;
+        line-height: 28px;
+        text-align: left;
+        color: colors.$gray1;
+        h3 {
+          margin-bottom: 1rem;
+          font-weight: 800;
+        }
+        p {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+    .create-free-account {
+      height: 200px;
+      width: 80%;
+      margin: 2rem auto;
+      background: colors.$blueIce;
+      background: transparent;
+      text-align: center;
+      p {
+        color: colors.$blueOxford;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.25rem;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      .gimme-btn {
+        width: auto;
+      }
+    }
+  }
+  .footer-links {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    a {
+      color: colors.$blueOxford;
+      padding: 8px 20px 10px 20px;
+      font-size: 20px;
+      height: 40px;
+      line-height: 20px;
+      &:hover {
+        background: colors.$blueOxford;
+        color: colors.$blueIce;
+        border: 2px solid colors.$blueIce;
+        filter: drop-shadow(0 0 0.5rem colors.$blueIce);
+      }
     }
   }
 }
 
-@media screen and (min-width: 0px) {
+button {
+  width: 100%;
+  height: 60px;
+  border: 0;
+  padding: 1rem;
+  margin: 0;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1.5rem;
+  line-height: 1rem;
+  cursor: pointer;
+  &.primary-btn {
+    background: colors.$blueOxford;
+    color: colors.$blueIce;
+    border: 4px solid colors.$blueIce;
+    &:hover {
+      filter: drop-shadow(0 0 0.5rem colors.$blueIce);
+    }
+    &.disabled {
+      background: transparent;
+      border: 4px solid transparent;
+      color: colors.$blueOxford;
+    }
+    &.disabled:hover {
+      filter: none;
+    }
+  }
+  &.ghost-btn {
+    font-family: 'Tilt Neon', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    background: transparent;
+    color: colors.$blueOxford;
+    border: 0;
+    &:hover {
+      filter: drop-shadow(0 0 0.5rem colors.$blueIce);
+    }
+    &.disabled {
+      background: gray;
+    }
+  }
 }

@@ -73,7 +73,7 @@ export function SignInPopup(props: SignInPopupProps) {
         </div>
         <div className={`${styles['footer']} w-full`}>
           <button
-            className={`${styles['sign-up-btn']} ghost-btn`}
+            className={`${styles['sign-up-btn']} ${styles['ghost-btn']}`}
             onClick={() => {
               signUpWithEmail();
             }}
@@ -81,7 +81,7 @@ export function SignInPopup(props: SignInPopupProps) {
             Sign Up
           </button>
           <button
-            className={`${styles['sign-in-btn']} ghost-btn`}
+            className={`${styles['sign-in-btn']} ${styles['ghost-btn']}`}
             onClick={() => {
               signInWithEmail();
             }}

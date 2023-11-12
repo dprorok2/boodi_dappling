@@ -3,7 +3,7 @@
 @use 'tailwindcss/utilities';
 
 @use 'app/styles/normalize';
-@use 'app/styles/core-theme';
+@use 'app/styles/global';
 
 @layer base {
   :root {
