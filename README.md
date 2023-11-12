@@ -1,5 +1,7 @@
 # BoodiAI
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/787bb728-19b1-4b79-8b55-f73223348dc6/deploy-status)](https://app.netlify.com/sites/fantastic-melomakarona-50f739/deploys)
+
 AI bot for Exponential Enlightenment.
 
 A meditation-like app with different “buddha” personalities. You can get AI-guidance from different enlightened perspectives for a monthly fee, and human coaches to provide 1 on 1 guidance. It uses GPT-4 and you can set up different coaching and learning experiences.
