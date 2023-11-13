@@ -168,12 +168,11 @@ export function Chat(props: ChatProps) {
     };
 
     socket.onmessage = (e) => {
-      console.log('Socket message', e);
       setTruths((truths) => truths + e.data);
     };
 
     socket.onclose = (e) => {
-      console.log('Socket closed', e.code, e.reason);
+      // console.log('Socket closed', e.code, e.reason);
     };
 
     socket.onerror = (err) => {
@@ -181,36 +180,55 @@ export function Chat(props: ChatProps) {
     };
   };
 
-  const getEightfoldPath = async (full = false) => {
-    const url = API_URLS.proxy.eightfoldPathFullStreaming;
+  const getEightfoldPath = async () => {
+    const url = API_URLS.proxy.eightfoldPathFull;
+    console.log(url);
+    const socket = new WebSocket(url);
 
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ suffering }),
-      });
+    socket.onopen = () => {
+      const request = JSON.stringify({ suffering });
+      socket.send(request);
+    };
 
-      if (!response.ok || !response.body) {
-        throw new Error(`Request failed with status ${response.status}`);
-      }
+    socket.onmessage = (e) => {
+      setEightfoldPathFull((eightfoldPath) => eightfoldPath + e.data);
+    };
 
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      const loopRunner = true;
+    socket.onclose = (e) => {
+      //console.log('Socket closed', e.code, e.reason);
+    };
 
-      while (loopRunner) {
-        const { value, done } = await reader.read();
-        if (done) break;
-        const decodedChunk = decoder.decode(value, { stream: true });
-        setEightfoldPathFull((eightfoldPath) => eightfoldPath + decodedChunk);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    socket.onerror = (err) => {
+      console.error('Websocket error:', err);
+    };
+
+    // try {
+    //   const response = await fetch(url, {
+    //     method: 'POST',
+    //     headers: {
+    //       Accept: 'application/json, text/plain, */*',
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({ suffering }),
+    //   });
+
+    //   if (!response.ok || !response.body) {
+    //     throw new Error(`Request failed with status ${response.status}`);
+    //   }
+
+    //   const reader = response.body.getReader();
+    //   const decoder = new TextDecoder();
+    //   const loopRunner = true;
+
+    //   while (loopRunner) {
+    //     const { value, done } = await reader.read();
+    //     if (done) break;
+    //     const decodedChunk = decoder.decode(value, { stream: true });
+    //     setEightfoldPathFull((eightfoldPath) => eightfoldPath + decodedChunk);
+    //   }
+    // } catch (error) {
+    //   console.error('Error:', error);
+    // }
   };
 
   return (
