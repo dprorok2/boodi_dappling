@@ -101,7 +101,7 @@ export function Chat(props: ChatProps) {
     setTruthBtnTextRandomly();
     try {
       await getFourTruths_ws();
-      await getEightfoldPath(fullPath);
+      await getEightfoldPath();
       setTruthBtnText('');
       //resetShowMeTheTruthBtn();
     } catch (error) {
