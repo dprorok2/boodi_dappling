@@ -1,9 +1,9 @@
 const BASE = import.meta.env.PROD
-  ? 'https://boodi-proxy.replit.app'
-  : 'http://localhost:1104';
+  ? 'https://boodi-be-4611caadff9d.herokuapp.com'
+  : 'http://localhost:3000';
 const BASE_WSS = import.meta.env.PROD
-  ? 'wss://boodi-proxy.replit.app'
-  : 'ws://localhost:1104';
+  ? 'wss://boodi-be-4611caadff9d.herokuapp.com'
+  : 'ws://localhost:3000';
 
 export const API_URLS = {
   proxy: {
