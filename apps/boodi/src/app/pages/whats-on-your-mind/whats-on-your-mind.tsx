@@ -48,9 +48,15 @@ export function WhatsOnYourMind(props: WhatsOnYourMindProps) {
       id="WhatsOnYourMindPage"
       className="w-screen min-h-screen overflow-x-hidden overflow-y-auto flex flex-col items-center justify-start"
     >
+      <img
+        src="./../../../../public/boodi-logo.svg"
+        className="w-[200px]"
+        style={{ marginTop: `${initVh / 8}px` }}
+      />
+
       <div
         className="w-[320px] sm:w-[80%] sm:max-w-[500px] md:w-[500px] px-5"
-        style={{ marginTop: `${initVh / 4}px` }}
+        style={{ marginTop: `${initVh / 8}px` }}
       >
         <h1 className="text-transparent bg-clip-text  w-[284px] mx-auto">
           What's on your mind?
