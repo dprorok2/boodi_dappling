@@ -17,7 +17,7 @@ export function Welcome(props: WelcomeProps) {
   const navigate = useNavigate();
 
   const navigateToChat = async () => {
-    navigate('/chat');
+    navigate('/release-your-worries');
   };
 
   return (
@@ -85,7 +85,7 @@ export function Welcome(props: WelcomeProps) {
               navigateToChat();
             }}
           >
-            Chat With Boodi
+            Release Your Worries
           </button>
         </p>
       </div>
