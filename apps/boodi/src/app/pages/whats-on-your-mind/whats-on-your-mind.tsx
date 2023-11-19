@@ -37,9 +37,15 @@ export function WhatsOnYourMind(props: WhatsOnYourMindProps) {
   return (
     <div
       id="WhatsOnYourMindPage"
-      className="w-screen min-h-screen overflow-x-hidden overflow-y-auto flex flex-col items-center "
+      className="w-screen min-h-screen overflow-x-hidden overflow-y-auto flex flex-col items-center justify-center"
     >
-      <div className="w-full sm:w-[580px] px-5 mt-[40%]">
+      <div className="w-full sm:w-[580px] px-5">
+        {/* <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-[286px] mx-auto">
+          What's on your mind?
+        </h1> */}
+        <h1 className="text-transparent bg-clip-text  w-[284px] mx-auto">
+          What's on your mind?
+        </h1>
         <div id="InputArea">
           <Input
             type="text"

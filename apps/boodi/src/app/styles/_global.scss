@@ -8,6 +8,15 @@
   --pink: 322, 97%, 76%;
   --white: 180, 57%, 97%;
   --black: 224, 38%, 6%;
+
+  --gradient-23190: linear-gradient(
+    90deg,
+    #e44b9c 0%,
+    #2e22ac 50%,
+    #19f7eb 100%
+  );
+
+  --font-sans: 'Tilt Neon';
 }
 
 *,
