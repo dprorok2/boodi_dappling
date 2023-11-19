@@ -37,14 +37,13 @@ export function WhatsOnYourMind(props: WhatsOnYourMindProps) {
   return (
     <div
       id="WhatsOnYourMindPage"
-      className="w-screen min-h-screen overflow-x-hidden overflow-y-auto flex flex-col justify-center items-center bg-sky-100"
+      className="w-screen min-h-screen overflow-x-hidden overflow-y-auto flex flex-col items-center "
     >
-      <div className="w-full sm:w-[580px] px-5">
+      <div className="w-full sm:w-[580px] px-5 mt-[40%]">
         <div id="InputArea">
           <Input
             type="text"
             className="w-full my-4"
-            placeholder="What's on your mind?"
             onChange={(e) => setInputText(e.target.value)}
           />
           <Button className="w-full my-4 mt-0" onClick={() => go()}>

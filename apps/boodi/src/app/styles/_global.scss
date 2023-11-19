@@ -1,3 +1,15 @@
+@use 'colors' as *;
+
+:root {
+  --background: 224, 42%, 14%;
+  --blueOxford: 226, 77%, 14%;
+  --blueIce: 178, 77%, 76%;
+  --darkYellow: 39, 99%, 61%;
+  --pink: 322, 97%, 76%;
+  --white: 180, 57%, 97%;
+  --black: 224, 38%, 6%;
+}
+
 *,
 *:before,
 *:after {
