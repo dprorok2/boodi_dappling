@@ -4,6 +4,12 @@ import { Input } from '@boodi/ui/input';
 import { useState } from 'react';
 import { API_URLS } from '@boodi/services/api-urls';
 import DOMPurify from 'dompurify';
+import {
+  ArrowBigRight,
+  ArrowRightCircle,
+  ChevronRight,
+  MousePointerClick,
+} from 'lucide-react';
 
 /* eslint-disable-next-line */
 export interface WhatsOnYourMindProps {}
@@ -12,7 +18,10 @@ export function WhatsOnYourMind(props: WhatsOnYourMindProps) {
   const [inputText, setInputText] = useState('not enough hours in the day');
   const [boodiResponse, setBoodiResponse] = useState('');
 
+  const initVh = window.innerHeight;
+
   const go = () => {
+    setBoodiResponse('');
     const url = API_URLS.api.zeroShotWisdom;
     const socket = new WebSocket(url);
 
@@ -37,27 +46,30 @@ export function WhatsOnYourMind(props: WhatsOnYourMindProps) {
   return (
     <div
       id="WhatsOnYourMindPage"
-      className="w-screen min-h-screen overflow-x-hidden overflow-y-auto flex flex-col items-center justify-center"
+      className="w-screen min-h-screen overflow-x-hidden overflow-y-auto flex flex-col items-center justify-start"
     >
-      <div className="w-full sm:w-[580px] px-5">
-        {/* <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-[286px] mx-auto">
-          What's on your mind?
-        </h1> */}
+      <div
+        className="w-[320px] sm:w-[80%] sm:max-w-[500px] md:w-[500px] px-5"
+        style={{ marginTop: `${initVh / 4}px` }}
+      >
         <h1 className="text-transparent bg-clip-text  w-[284px] mx-auto">
           What's on your mind?
         </h1>
-        <div id="InputArea">
+        <div id="InputArea" className="flex flex-col md:flex-row">
           <Input
             type="text"
-            className="w-full my-4"
+            className=""
             onChange={(e) => setInputText(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') go();
+            }}
           />
-          <Button className="w-full my-4 mt-0" onClick={() => go()}>
-            Go
+          <Button className="mt-3 md:mt-0 md:ml-3" onClick={() => go()}>
+            <MousePointerClick />
           </Button>
         </div>
 
-        <div id="OutputArea" className="mx-auto">
+        <div id="OutputArea" className="mx-auto mt-7">
           <div
             className={styles['boodi-response']}
             dangerouslySetInnerHTML={{

@@ -1,7 +1,7 @@
 @use 'colors' as *;
 
 :root {
-  --background: 224, 42%, 14%;
+  --background: 224, 10%, 14%;
   --blueOxford: 226, 77%, 14%;
   --blueIce: 178, 77%, 76%;
   --darkYellow: 39, 99%, 61%;
@@ -12,11 +12,13 @@
   --gradient-23190: linear-gradient(
     90deg,
     #e44b9c 0%,
-    #2e22ac 50%,
+    #564ad7 50%,
     #19f7eb 100%
   );
 
   --font-sans: 'Tilt Neon';
+  --border: 178, 77%, 76%;
+  --input: 178, 77%, 76%;
 }
 
 *,
