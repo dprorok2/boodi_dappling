@@ -49,7 +49,8 @@ export function WhatsOnYourMind(props: WhatsOnYourMindProps) {
       className="w-screen min-h-screen overflow-x-hidden overflow-y-auto flex flex-col items-center justify-start"
     >
       <img
-        src="./../../../../public/boodi-logo.svg"
+        src="boodi-logo.svg"
+        alt="Boodi.ai logo"
         className="w-[200px]"
         style={{ marginTop: `${initVh / 8}px` }}
       />
