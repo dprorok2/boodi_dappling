@@ -5,15 +5,15 @@ module.exports = {
   darkMode: ['class'],
   content: ['./apps/**/*.{html,ts,tsx}', './libs/**/*.{html,ts,tsx}'],
   theme: {
+    screens: {
+      sm: '360px',
+      md: '720px',
+      lg: '1480px',
+      xl: '1980px',
+    },
     container: {
       center: true,
       padding: '2rem',
-      screens: {
-        // sm: '1280px',
-        // md: '1536px',
-        // lg: '1920px',
-        // xl: '2560px',
-      },
     },
     extend: {
       colors: {
@@ -21,7 +21,7 @@ module.exports = {
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
+        foreground: 'hsl(var(--blueIce))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
@@ -50,6 +50,9 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        blueOxford: 'hsl(var(--blueOxford))',
+        blueIce: 'hsl(var(--blueIce))',
+        pink: 'hsl(var(--pink))',
       },
       borderRadius: {
         lg: `var(--radius)`,

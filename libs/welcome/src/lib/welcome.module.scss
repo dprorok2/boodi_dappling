@@ -31,6 +31,7 @@ body.welcome {
         );
         background-clip: text;
         color: transparent;
+        font-family: 'Permanent Marker';
       }
     }
     .content {
@@ -68,7 +69,7 @@ body.welcome {
   }
 }
 
-button {
+.welcome button {
   width: 100%;
   height: 60px;
   border: 0;

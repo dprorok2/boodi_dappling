@@ -1,0 +1,14 @@
+@use './../../styles/colors';
+
+h1 {
+  background: var(--gradient-23190);
+  font-family: 'Days One';
+  font-size: 1.5rem;
+}
+
+.boodi-response p {
+  margin-bottom: 1.25rem;
+  font-family: 'Tilt Neon', sans-serif;
+  line-height: 1.75rem;
+  text-align: justify;
+}

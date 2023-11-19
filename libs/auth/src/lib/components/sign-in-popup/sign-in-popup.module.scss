@@ -56,19 +56,25 @@
       padding-top: 0;
       .sign-up-btn {
         flex: 1 1 100%;
-        color: colors.$blueIce;
         width: auto;
+        font-family: 'Tilt Neon', sans-serif;
+        font-size: 1rem;
+        font-weight: 800;
+        color: colors.$white;
       }
       .sign-in-btn {
         flex: 1 1 100%;
-        background: colors.$blueIce;
         width: auto;
+        font-family: 'Tilt Neon', sans-serif;
+        font-size: 1rem;
+        font-weight: 800;
+        color: colors.$blueOxford;
       }
     }
   }
 }
 
-button {
+.chat button {
   width: 100%;
   height: 60px;
   border: 0;

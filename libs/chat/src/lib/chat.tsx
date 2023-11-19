@@ -127,7 +127,7 @@ export function Chat(props: ChatProps) {
   };
 
   const getFourTruths = async () => {
-    const url = API_URLS.proxy.fourNobleTruths;
+    const url = API_URLS.api.fourNobleTruths;
 
     try {
       const response = await fetch(url, {
@@ -159,7 +159,7 @@ export function Chat(props: ChatProps) {
   };
 
   const getFourTruths_ws = () => {
-    const url = API_URLS.proxy.fourNobleTruths;
+    const url = API_URLS.api.fourNobleTruths;
     const socket = new WebSocket(url);
 
     socket.onopen = () => {
@@ -181,7 +181,7 @@ export function Chat(props: ChatProps) {
   };
 
   const getEightfoldPath = async () => {
-    const url = API_URLS.proxy.eightfoldPathFull;
+    const url = API_URLS.api.eightfoldPathFull;
     console.log(url);
     const socket = new WebSocket(url);
 

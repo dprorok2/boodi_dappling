@@ -6,8 +6,9 @@ const BASE_WSS = import.meta.env.PROD
   : 'ws://localhost:3000';
 
 export const API_URLS = {
-  proxy: {
+  api: {
     fourNobleTruths: `${BASE_WSS}/four-noble-truths`,
     eightfoldPathFull: `${BASE_WSS}/eightfold-path/full`,
+    zeroShotWisdom: `${BASE_WSS}/zero-shot-wisdom`,
   },
 };
