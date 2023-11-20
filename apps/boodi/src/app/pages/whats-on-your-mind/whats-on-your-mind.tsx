@@ -1,29 +1,33 @@
 import { Button } from '@boodi/ui/button';
 import styles from './whats-on-your-mind.module.scss';
 import { Input } from '@boodi/ui/input';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { API_URLS } from '@boodi/services/api-urls';
 import DOMPurify from 'dompurify';
-import {
-  ArrowBigRight,
-  ArrowRightCircle,
-  ChevronRight,
-  MousePointerClick,
-} from 'lucide-react';
+import { MousePointerClick } from 'lucide-react';
 
 /* eslint-disable-next-line */
 export interface WhatsOnYourMindProps {}
 
 export function WhatsOnYourMind(props: WhatsOnYourMindProps) {
-  const [inputText, setInputText] = useState('not enough hours in the day');
+  const [inputText, setInputText] = useState('');
   const [boodiResponse, setBoodiResponse] = useState('');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const webSocketRef = useRef<WebSocket | null>(null);
 
   const initVh = window.innerHeight;
 
   const go = () => {
+    setIsButtonDisabled(true);
     setBoodiResponse('');
+
+    if (webSocketRef.current) {
+      webSocketRef.current.close();
+    }
+
     const url = API_URLS.api.zeroShotWisdom;
     const socket = new WebSocket(url);
+    webSocketRef.current = socket;
 
     socket.onopen = () => {
       const request = JSON.stringify({ inputText });
@@ -34,12 +38,13 @@ export function WhatsOnYourMind(props: WhatsOnYourMindProps) {
       setBoodiResponse((res) => res + e.data);
     };
 
-    socket.onclose = (e) => {
-      // console.log('Socket closed', e.code, e.reason);
+    socket.onclose = () => {
+      webSocketRef.current = null;
+      setIsButtonDisabled(false);
     };
 
-    socket.onerror = (err) => {
-      console.error('Websocket error:', err);
+    socket.onerror = () => {
+      webSocketRef.current = null;
     };
   };
 
@@ -71,7 +76,11 @@ export function WhatsOnYourMind(props: WhatsOnYourMindProps) {
               if (e.key === 'Enter') go();
             }}
           />
-          <Button className="mt-3 md:mt-0 md:ml-3" onClick={() => go()}>
+          <Button
+            className="mt-3 md:mt-0 md:ml-3"
+            onClick={() => go()}
+            disabled={isButtonDisabled}
+          >
             <MousePointerClick />
           </Button>
         </div>
