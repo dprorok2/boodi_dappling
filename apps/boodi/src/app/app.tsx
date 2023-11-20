@@ -12,7 +12,7 @@ export function App() {
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<WhatsOnYourMind />} />
           <Route
             path="/release-your-worries"
             element={<ReleaseYourWorries />}
