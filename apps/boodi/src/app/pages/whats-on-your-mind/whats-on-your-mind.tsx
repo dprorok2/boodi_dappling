@@ -18,6 +18,8 @@ export function WhatsOnYourMind(props: WhatsOnYourMindProps) {
   const initVh = window.innerHeight;
 
   const go = () => {
+    if (isButtonDisabled) return;
+
     setIsButtonDisabled(true);
     setBoodiResponse('');
 
