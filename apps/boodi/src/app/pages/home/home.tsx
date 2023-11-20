@@ -1,11 +1,11 @@
-import { Welcome } from '@boodi/welcome';
+import { WhatsOnYourMind } from '@boodi/whats-on-your-mind';
 import styles from './home.module.scss';
 
 /* eslint-disable-next-line */
 export interface HomeProps {}
 
 export function Home(props: HomeProps) {
-  return <Welcome />;
+  return <WhatsOnYourMind />;
 }
 
 export default Home;
